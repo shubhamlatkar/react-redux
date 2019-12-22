@@ -1,0 +1,19 @@
+.container {
+  width: 80%;
+  border: 1px solid black;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.buttonStyles {
+  margin: 10px auto;
+  background-color: rgb(145, 142, 142);
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.buttonStyles:hover {
+  background-color: rgb(248, 166, 166);
+}
