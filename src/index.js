@@ -22,6 +22,7 @@ const logger = store => next => action => {
 
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>

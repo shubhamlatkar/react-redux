@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
+
 import * as actionCreators from "../src/store/actions/index";
+
 import Styles from "./App.module.css";
 import { connect } from "react-redux";
 
@@ -88,6 +90,7 @@ const mapStateToProps = state => {
 
 const mapDispatchTOProps = dispatch => {
   return {
+
     onIncCounter: () => dispatch(actionCreators.increment(10)),
     onDecCounter: () => dispatch(actionCreators.decrement(10)),
     onStoreResult: value => dispatch(actionCreators.storeResult(value)),
