@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 import * as actionCreators from "../src/store/actions/index";
 
 import Styles from "./App.module.css";
@@ -59,7 +58,7 @@ class App extends Component {
             className={Styles.buttonStyles}
             onClick={() => this.props.onStoreResult(this.props.ctr)}
           >
-            Store
+            Store Result
           </button>
         </div>
         <div className={Styles.container}>
@@ -90,7 +89,6 @@ const mapStateToProps = state => {
 
 const mapDispatchTOProps = dispatch => {
   return {
-
     onIncCounter: () => dispatch(actionCreators.increment(10)),
     onDecCounter: () => dispatch(actionCreators.decrement(10)),
     onStoreResult: value => dispatch(actionCreators.storeResult(value)),
