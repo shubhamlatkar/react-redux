@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import * as actionCreators from "../src/store/actions/index";
 import Styles from "./App.module.css";
 import { connect } from "react-redux";
 
@@ -38,7 +39,10 @@ class App extends Component {
           >
             Inc
           </button>
-          <button className={Styles.buttonStyles} onClick={this.resetHandler}>
+          <button
+            className={Styles.buttonStyles}
+            onClick={this.props.onResetResult}
+          >
             Reset
           </button>
           <button
@@ -48,6 +52,28 @@ class App extends Component {
             Dec
           </button>
         </div>
+        <div className={Styles.container}>
+          <button
+            className={Styles.buttonStyles}
+            onClick={() => this.props.onStoreResult(this.props.ctr)}
+          >
+            Store
+          </button>
+        </div>
+        <div className={Styles.container}>
+          <ul className={Styles.ulStyles}>
+            {this.props.result.map(counter => {
+              return (
+                <li
+                  key={counter.id}
+                  onClick={() => this.props.onDeleteResult(counter.id)}
+                >
+                  <strong>{counter.value}</strong>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -55,14 +81,18 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    ctr: state.counter
+    ctr: state.ctr.counter,
+    result: state.result.result
   };
 };
 
 const mapDispatchTOProps = dispatch => {
   return {
-    onIncCounter: () => dispatch({ type: "INCREMENT", val: 10 }),
-    onDecCounter: () => dispatch({ type: "DECREMENT", val: 10 })
+    onIncCounter: () => dispatch(actionCreators.increment(10)),
+    onDecCounter: () => dispatch(actionCreators.decrement(10)),
+    onStoreResult: value => dispatch(actionCreators.storeResult(value)),
+    onDeleteResult: id => dispatch(actionCreators.deleteResult(id)),
+    onResetResult: () => dispatch(actionCreators.resetResult())
   };
 };
 export default connect(
