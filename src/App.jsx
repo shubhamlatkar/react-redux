@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
-import * as actionTypes from "../src/store/actions";
+
+import * as actionCreators from "../src/store/actions/index";
+
 import Styles from "./App.module.css";
 import { connect } from "react-redux";
 
@@ -88,12 +90,12 @@ const mapStateToProps = state => {
 
 const mapDispatchTOProps = dispatch => {
   return {
-    onIncCounter: () => dispatch({ type: actionTypes.INCREMENT, val: 10 }),
-    onDecCounter: () => dispatch({ type: actionTypes.DECREMENT, val: 10 }),
-    onStoreResult: value =>
-      dispatch({ type: actionTypes.STORE_RESULT, value: value }),
-    onDeleteResult: id => dispatch({ type: actionTypes.DELETE_RESULT, id: id }),
-    onResetResult: () => dispatch({ type: actionTypes.RESET })
+
+    onIncCounter: () => dispatch(actionCreators.increment(10)),
+    onDecCounter: () => dispatch(actionCreators.decrement(10)),
+    onStoreResult: value => dispatch(actionCreators.storeResult(value)),
+    onDeleteResult: id => dispatch(actionCreators.deleteResult(id)),
+    onResetResult: () => dispatch(actionCreators.resetResult())
   };
 };
 export default connect(
