@@ -1,5 +1,5 @@
-# react-redux
+# react-redux-thunk
 
-React Redux Thnk middleware sample
+React Redux Thunk middleware sample
 
 ### Sample redux example for practice with redux reducer, store, actions, combined reducers, thunk as middleware.
