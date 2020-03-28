@@ -1,32 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import App from "./App";
+// import App from "../src/React-hooks/MyApp"; //react-hooks
+import App from "./React-redux-thunk/App"; //react-redux-thunk
+// import App from "../src/React-redux-bootstrap/App"; // react-redux-bootstrap
+// import App from "../src/Mentor-on-demand/App";
 import "./styles.css";
-import counterReducer from "./store/reducers/counter";
-import resultReducer from "./store/reducers/result";
-
-const rootReducer = combineReducers({
-  ctr: counterReducer,
-  result: resultReducer
-});
-
-const logger = store => next => action => {
-  console.log("[Middleware] DIspatching", action);
-  const result = next(action);
-  console.log("[Middlewawre]  next state", store.getState());
-  return result;
-};
-
-const store = createStore(rootReducer, applyMiddleware(logger, thunk));
-
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  rootElement
-);
+ReactDOM.render(<App />, rootElement);

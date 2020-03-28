@@ -1,5 +1,7 @@
-# react-redux-thunk
+# React smapel prrojects
 
-React Redux Thunk middleware sample
+React Redux Thunk Bootstrap React Hooks
 
-### Sample redux example for practice with redux reducer, store, actions, combined reducers, thunk as middleware.
+### Sample React examples for practice
+
+## codesandbox link https://codesandbox.io/s/react-redux-thunk-q132z

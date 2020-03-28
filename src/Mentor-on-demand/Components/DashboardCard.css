@@ -1,0 +1,9 @@
+.cardStyles {
+  border: 1px solid white;
+  padding: 10px;
+  box-shadow: 5px 10px #888888;
+  width: "80%";
+  margin-bottom: "3%";
+  background-image: linear-gradient(to top right, #404040 0%, #4dffff 100%);
+  color: white;
+}
