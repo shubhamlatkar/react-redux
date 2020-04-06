@@ -1,0 +1,12 @@
+.login-styles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .login-styles {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
