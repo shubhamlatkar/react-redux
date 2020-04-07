@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, Form, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
 import "./LogIn.css";
+import UserContext from "../../../Store/Contexts/UserContext";
 
 const SignUp = props => {
-  const [userType, setUserType] = useState(Boolean);
+  const userContext = useContext(UserContext);
+
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    type: Boolean
+  });
 
   const toggleUserHandler = event => {
-    setUserType(!userType);
+    setUser({ ...user, type: !user.type });
+  };
+
+  const onChangeHandler = event => {
+    let temUser = { ...user };
+    temUser[event.target.name] = event.target.value;
+    setUser(temUser);
+  };
+
+  const submitHandler = event => {
+    event.preventDefault();
+    userContext.signup(user.name, user.email, user.password, user.type);
   };
   return (
     <React.Fragment>
@@ -15,8 +34,22 @@ const SignUp = props => {
       </Card.Title>
       <Form>
         <Form.Group controlId="formBasicEmail">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            onChange={e => onChangeHandler(e)}
+            type="text"
+            name="name"
+            placeholder="Enter Name"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control
+            onChange={e => onChangeHandler(e)}
+            type="email"
+            name="email"
+            placeholder="Enter email"
+          />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
@@ -24,11 +57,12 @@ const SignUp = props => {
 
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control
+            onChange={e => onChangeHandler(e)}
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
         </Form.Group>
         <Form.Group
           className="form-inline login-styles"
@@ -38,15 +72,15 @@ const SignUp = props => {
           <ButtonGroup toggle className="mb-2">
             <ToggleButton
               type="checkbox"
-              value={userType}
-              checked={userType}
+              value={user.type}
+              checked={user.type}
               onChange={event => toggleUserHandler(event)}
             >
-              {userType ? "Mentor" : "Student"}
+              {user.type ? "Mentor" : "Student"}
             </ToggleButton>
           </ButtonGroup>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button onClick={e => submitHandler(e)} variant="primary" type="submit">
           Sign Up
         </Button>
       </Form>

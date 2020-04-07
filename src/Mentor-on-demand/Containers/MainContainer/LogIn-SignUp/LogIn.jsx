@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, Form, Button, ToggleButton, ButtonGroup } from "react-bootstrap";
 import "./LogIn.css";
+import UserContext from "../../../Store/Contexts/UserContext";
+import { withRouter } from "react-router";
 
 const LogIn = props => {
-  const [userType, setUserType] = useState(Boolean);
+  const userContext = useContext(UserContext);
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    type: false
+  });
 
   const toggleUserHandler = event => {
-    setUserType(!userType);
+    setUser({ ...user, type: !user.type });
+  };
+
+  const submitHandler = event => {
+    event.preventDefault();
+    userContext.login(user.email, user.password, user.type);
+    props.history.push("/");
+  };
+
+  const handelOnchange = event => {
+    let temUser = { ...user };
+    temUser[event.target.type] = event.target.value;
+    setUser(temUser);
   };
   return (
     <React.Fragment>
@@ -16,12 +35,20 @@ const LogIn = props => {
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control
+            onChange={e => handelOnchange(e)}
+            type="email"
+            placeholder="Enter email"
+          />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control
+            onChange={e => handelOnchange(e)}
+            type="password"
+            placeholder="Password"
+          />
         </Form.Group>
         <Form.Group
           className="form-inline login-styles"
@@ -30,16 +57,20 @@ const LogIn = props => {
           <ButtonGroup toggle className="mb-2">
             <ToggleButton
               type="checkbox"
-              value={userType}
-              checked={userType}
+              value={user.type}
+              checked={user.type}
               onChange={event => toggleUserHandler(event)}
             >
-              {userType ? "Mentor" : "Student"}
+              {user.type ? "Mentor" : "Student"}
             </ToggleButton>
           </ButtonGroup>
           <Form.Check type="checkbox" label="Remember Me" />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={event => submitHandler(event)}
+        >
           Submit
         </Button>
       </Form>
@@ -47,4 +78,4 @@ const LogIn = props => {
   );
 };
 
-export default LogIn;
+export default withRouter(LogIn);

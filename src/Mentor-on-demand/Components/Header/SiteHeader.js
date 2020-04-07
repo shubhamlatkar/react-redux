@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import UserContext from "../../Store/Contexts/UserContext";
 
 const SiteHeader = props => {
+  const userContext = useContext(UserContext);
+
   const headerStyles = {
     minHeight: "0%"
   };
+
+  const onClickHandler = e => {
+    // userContext.logout();
+    props.history.push("/");
+  };
+
   return (
     <header>
       <Navbar
@@ -29,8 +38,12 @@ const SiteHeader = props => {
               <NavDropdown.Item href="#action/3.4">Address</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Button variant="outline-primary">
-            <Link to="/login">logIn</Link>
+          <Button
+            onClick={onClickHandler}
+            type="button"
+            variant="outline-primary"
+          >
+            Log
           </Button>
         </Navbar.Collapse>
       </Navbar>
@@ -38,4 +51,4 @@ const SiteHeader = props => {
   );
 };
 
-export default SiteHeader;
+export default withRouter(SiteHeader);
