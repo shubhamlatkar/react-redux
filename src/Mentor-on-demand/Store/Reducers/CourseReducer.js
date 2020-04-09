@@ -1,9 +1,14 @@
 import * as actionTypes from "../action-types";
 
+export const initState = {
+  courses: [],
+  isLoading: false
+};
+
 const CourseReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.SET_COURSE:
-      return { ...action.courses };
+      return { ...state, courses: action.response };
 
     default:
       return state;

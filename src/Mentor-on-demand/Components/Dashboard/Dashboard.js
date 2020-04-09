@@ -1,40 +1,30 @@
-import React, { Component, useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Banner } from "../Banner/Banner";
 import { DashboardHeader } from "../Dashboard/DashboardHeader/DashboardHeader";
 import DashboardContent from "../Dashboard/DashboardContent/DashboardContent";
-import axios from "axios";
 import { Route } from "react-router";
 import MyModal from "./DashboardContent/Modal/MyModal";
 import CourseContext from "../../Store/Contexts/CourseContext";
+import { Spinner } from "react-bootstrap";
 
 const Dashboard = props => {
-  const [posts, setPosts] = useState([]);
   const courseContext = useContext(CourseContext);
-
-  // componentDidMount() {
-  // }
+  let { courses, getCourses } = courseContext;
 
   useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/comments")
-      .then(res => {
-        setPosts({ posts: [...res.data] });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    courseContext.getCourses(null);
-  }, []);
+    getCourses();
+  }, [getCourses]);
 
-  useEffect(() => {
-    console.log("courseContext.courses", courseContext.cources);
-  });
-
+  let spinner = (
+    <Spinner animation="border" role="status">
+      <span className="sr-only">Loading...</span>
+    </Spinner>
+  );
   return (
     <section className="dashboard">
       <DashboardHeader />
       <Banner />
-      <DashboardContent posts={[]} />
+      <DashboardContent posts={courses ? courses.slice(0, 10) : spinner} />
       <Route path="/dashboard/course/:id" component={MyModal} />
     </section>
   );
