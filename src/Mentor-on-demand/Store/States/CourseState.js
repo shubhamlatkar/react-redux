@@ -8,9 +8,9 @@ const CourseState = props => {
   const [courseState, dispatch] = useReducer(CourseReducer, initState);
   const getCourses = useCallback(id => {
     if (!id) {
-      // .get("https://jsonplaceholder.typicode.com/comments")
+      // .get("https://k7heb.sse.codesandbox.io/cources")
       axios
-        .get("https://k7heb.sse.codesandbox.io/cources")
+        .get("https://jsonplaceholder.typicode.com/comments")
         .then(res => {
           dispatch(actionCreators.success(res.data));
         })
