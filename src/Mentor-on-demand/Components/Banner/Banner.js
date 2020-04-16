@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Jumbotron, Container } from "react-bootstrap";
 import UserContext from "../../Store/Contexts/UserContext";
+import "./Banner.css";
 
 export const Banner = props => {
   const userContext = useContext(UserContext);

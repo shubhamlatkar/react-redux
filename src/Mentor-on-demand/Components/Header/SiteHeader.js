@@ -5,14 +5,17 @@ import UserContext from "../../Store/Contexts/UserContext";
 
 const SiteHeader = props => {
   const userContext = useContext(UserContext);
+  let { isAuth } = userContext;
 
   const headerStyles = {
     minHeight: "0%"
   };
 
   const onClickHandler = e => {
-    // userContext.logout();
-    props.history.push("/");
+    if (isAuth) {
+      userContext.logout();
+      props.history.push("/");
+    } else props.history.push("/login");
   };
 
   return (
@@ -43,7 +46,7 @@ const SiteHeader = props => {
             type="button"
             variant="outline-primary"
           >
-            Log
+            {isAuth ? "LogOut" : "LogIn"}
           </Button>
         </Navbar.Collapse>
       </Navbar>
