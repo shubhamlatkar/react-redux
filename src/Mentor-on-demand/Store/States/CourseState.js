@@ -1,5 +1,5 @@
 import React, { useReducer, useCallback } from "react";
-import axios from "axios";
+import axios from "../Axios/baseAxios";
 import * as actionCreators from "../actionCreators";
 import CourseContext from "../Contexts/CourseContext";
 import CourseReducer, { initState } from "../Reducers/CourseReducer";
@@ -8,9 +8,8 @@ const CourseState = props => {
   const [courseState, dispatch] = useReducer(CourseReducer, initState);
   const getCourses = useCallback(id => {
     if (!id) {
-      // .get("https://k7heb.sse.codesandbox.io/cources")
       axios
-        .get("https://jsonplaceholder.typicode.com/comments")
+        .get("/cources")
         .then(res => {
           dispatch(actionCreators.success(res.data));
         })

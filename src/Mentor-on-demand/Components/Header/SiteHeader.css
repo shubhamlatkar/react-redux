@@ -1,0 +1,14 @@
+.main-navbar {
+  min-height: 4rem;
+  background: coral;
+}
+
+.logIn-button {
+  color: #333;
+  background: #fa4300;
+  border: 1px solid #333;
+}
+.logIn-button:hover {
+  border: 1px solid #333;
+  background: #f09a78;
+}

@@ -10,8 +10,8 @@ export const Banner = props => {
       <Container>
         <h1 className="text-left">
           Welcome{" "}
-          {userContext.userState.myUser !== undefined
-            ? userContext.userState.myUser.name
+          {userContext.userState !== undefined
+            ? userContext.userState.name
             : "Guest"}
         </h1>
         <p>You are a registered user</p>

@@ -5,7 +5,8 @@ const UserContext = React.createContext({
   userState: {},
   login: () => {},
   signup: () => {},
-  logout: () => {}
+  logout: () => {},
+  getNotifications: () => {}
 });
 
 export default UserContext;

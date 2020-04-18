@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import { Button, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import UserContext from "../../Store/Contexts/UserContext";
+
+import "../../scss/style.scss";
 
 const SiteHeader = props => {
   const userContext = useContext(UserContext);
   let { isAuth } = userContext;
-
-  const headerStyles = {
-    minHeight: "0%"
-  };
 
   const onClickHandler = e => {
     if (isAuth) {
@@ -20,13 +18,7 @@ const SiteHeader = props => {
 
   return (
     <header>
-      <Navbar
-        style={headerStyles}
-        bg="dark"
-        fixed="top"
-        varient="dark"
-        expand="xl"
-      >
+      <Navbar className="main-navbar" fixed="top" expand="xl">
         <Navbar.Brand href="#home">Mentor On Demand</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -41,11 +33,7 @@ const SiteHeader = props => {
               <NavDropdown.Item href="#action/3.4">Address</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Button
-            onClick={onClickHandler}
-            type="button"
-            variant="outline-primary"
-          >
+          <Button onClick={onClickHandler} className="logIn-button">
             {isAuth ? "LogOut" : "LogIn"}
           </Button>
         </Navbar.Collapse>

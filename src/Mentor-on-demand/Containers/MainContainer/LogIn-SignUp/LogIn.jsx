@@ -1,10 +1,18 @@
-import React, { useState, useContext } from "react";
-import { Card, Form, Button, ToggleButton, ButtonGroup } from "react-bootstrap";
+import React, { useState, useContext, useCallback } from "react";
+import {
+  Card,
+  Form,
+  Button,
+  ToggleButton,
+  ButtonGroup,
+  Spinner,
+  Alert
+} from "react-bootstrap";
 import "./LogIn.css";
 import UserContext from "../../../Store/Contexts/UserContext";
-import { withRouter } from "react-router";
+import { withRouter, Redirect } from "react-router";
 
-const LogIn = props => {
+const LogIn = React.memo(props => {
   const userContext = useContext(UserContext);
   const [user, setUser] = useState({
     email: "",
@@ -18,8 +26,8 @@ const LogIn = props => {
 
   const submitHandler = event => {
     event.preventDefault();
+
     userContext.login(user.email, user.password, user.type);
-    props.history.push("/");
   };
 
   const handelOnchange = event => {
@@ -27,12 +35,16 @@ const LogIn = props => {
     temUser[event.target.type] = event.target.value;
     setUser(temUser);
   };
-  return (
+
+  let logForm = (
     <React.Fragment>
       <Card.Title>
         <h2>Log In</h2>
       </Card.Title>
-      <Form>
+      {userContext.userState && userContext.userState.error ? (
+        <Alert variant="danger">{userContext.userState.error}</Alert>
+      ) : null}
+      <Form className="custom-form">
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -60,6 +72,7 @@ const LogIn = props => {
               value={user.type}
               checked={user.type}
               onChange={event => toggleUserHandler(event)}
+              className="custom-form-btn"
             >
               {user.type ? "Mentor" : "Student"}
             </ToggleButton>
@@ -70,12 +83,31 @@ const LogIn = props => {
           variant="primary"
           type="submit"
           onClick={event => submitHandler(event)}
+          className="custom-form-btn"
         >
           Submit
         </Button>
       </Form>
     </React.Fragment>
   );
-};
+  logForm =
+    userContext.userState && userContext.userState.loading ? (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    ) : (
+      logForm
+    );
+  if (userContext.isAuth) {
+    logForm =
+      userContext.userState && userContext.userState.type ? (
+        <Redirect to="/dashboard/notifications" />
+      ) : (
+        <Redirect to="/dashboard" />
+      );
+  }
+
+  return logForm;
+});
 
 export default withRouter(LogIn);

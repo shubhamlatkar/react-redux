@@ -1,0 +1,107 @@
+.course-card {
+  border: 1px solid white;
+  padding: 10px;
+  box-shadow: 5px 10px #888888;
+  background-image: linear-gradient(to top right, #dd977d 25%, #f56f3f 75%);
+  color: white;
+  min-width: 100%;
+  margin-bottom: 3rem;
+
+  &-list {
+    li {
+      display: inline;
+      list-style-type: none;
+      padding-right: 20px;
+    }
+  }
+  
+  .imgStyles {
+    width: 150px;
+    height: 150px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .card-header {
+    background: #ec5c28;
+    color: #fff;
+  }
+  
+  .know-more {
+    text-decoration: none;
+    color: blue;
+    font-size: 1rem;
+  }
+  .know-more:hover {
+    text-decoration: underline;
+    color: #333;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: #333;
+  }
+}
+
+.main-navbar {
+  min-height: 4rem;
+  background: coral;
+
+  .logIn-button {
+    color: #333;
+    background: #fa4300;
+    border: 1px solid #333;
+  }
+  .logIn-button:hover {
+    border: 1px solid #333;
+    background: #f09a78;
+  }
+  .logIn-button:active {
+    color: #fff;
+    background-color: #f09a78;
+    border-color: #333;
+  }
+}
+
+.general-header {
+  margin-top: 4rem;
+  background: #f09a78;
+
+  &-search-btn {
+    border-color: #333;
+    background: #ec5c28;
+  }
+  &-search-btn:hover {
+    border: 1px solid #333;
+    background: #f09a78;
+  }
+  &-search-btn:active {
+    color: #fff;
+    background-color: #f09a78 !important ; 
+    border-color: #333;
+  }
+}
+
+.form-container {
+  margin: 2rem auto;
+  &-btn {
+    border-color: #333;
+    background: #ec5c28;
+  }
+  &-btn:hover {
+    border: 1px solid #333;
+    background: #f09a78;
+  }
+  &-btn:active {
+    color: #fff;
+    background-color: #f09a78 !important ; 
+    border-color: #333;
+  }
+
+}

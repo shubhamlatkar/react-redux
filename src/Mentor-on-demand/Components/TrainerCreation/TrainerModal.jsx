@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
-import { withRouter } from "react-router";
+import { Modal, Button } from "react-bootstrap";
+import TrainerForm from "./TrainerForm";
 
-const MyModal = props => {
+const TrainerModal = props => {
   const [show, setShow] = useState(true);
 
   const handleClose = () => {
@@ -18,7 +17,9 @@ const MyModal = props => {
         <Modal.Header closeButton>
           <Modal.Title>{props.match.params.id}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <TrainerForm />
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -32,4 +33,4 @@ const MyModal = props => {
   );
 };
 
-export default withRouter(MyModal);
+export default TrainerModal;

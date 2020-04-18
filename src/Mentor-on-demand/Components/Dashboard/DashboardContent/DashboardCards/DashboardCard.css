@@ -2,8 +2,41 @@
   border: 1px solid white;
   padding: 10px;
   box-shadow: 5px 10px #888888;
-  width: "80%";
-  margin-bottom: "3%";
-  background-image: linear-gradient(to top right, #404040 0%, #4dffff 100%);
+  background-image: linear-gradient(to top right, #dd977d 25%, #f56f3f 75%);
   color: white;
+  min-width: 100%;
+  margin-bottom: 3rem;
+}
+
+.imgStyles {
+  width: 150px;
+  height: 150px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.card-header {
+  background: #ec5c28;
+  color: #fff;
+}
+
+.know-more {
+  text-decoration: none;
+  color: blue;
+  font-size: 1rem;
+}
+.know-more:hover {
+  text-decoration: underline;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #333;
 }
