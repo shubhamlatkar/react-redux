@@ -10,11 +10,12 @@ const SignUp = props => {
     name: "",
     email: "",
     password: "",
-    type: Boolean
+    type: false
   });
 
   const toggleUserHandler = event => {
     setUser({ ...user, type: !user.type });
+    if (!user.type) props.history.push("/signup/mentor");
   };
 
   const onChangeHandler = event => {

@@ -1,5 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useCallback } from "react";
 import axios from "../Axios/baseAxios";
+import * as jwt from "jwt-decode";
 import * as actionTypes from "../action-types";
 import UserContext from "../Contexts/UserContext";
 import UserReducer, { initState } from "../Reducers/UserReducer";
@@ -7,7 +8,31 @@ import UserReducer, { initState } from "../Reducers/UserReducer";
 const UserState = props => {
   const [userState, dispatch] = useReducer(UserReducer, initState);
 
-  const loginHandler = async (email, password, type) => {
+  const tryAutoLogin = useCallback(async () => {
+    let token = localStorage.getItem("token");
+    var decoded = jwt.jwt_decode(token);
+    let url = decoded.type ? "mentor/" : "users/";
+    token = "Bearer " + token;
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: token
+    };
+    axios
+      .get(url + "me", { headers: headers })
+      .then(res => {
+        let user = res.data;
+        user.isAuth = true;
+        user.loading = false;
+        user.type = decoded.type;
+        dispatch({ type: actionTypes.LOGIN, user });
+      })
+      .catch(err => {
+        let user = { loading: false, error: "invalid cred", isAuth: false };
+        dispatch({ type: actionTypes.LOGIN, user });
+      });
+  }, []);
+
+  const loginHandler = (email, password, type) => {
     let user = { loading: true, isAuth: false };
     dispatch({ type: actionTypes.LOGIN, user });
     let url = type ? "mentor/" : "users/";
@@ -55,8 +80,21 @@ const UserState = props => {
   };
 
   const logoutHandler = () => {
-    localStorage.clear();
-    dispatch({ type: actionTypes.LOGOUT, user: {} });
+    let token = localStorage.getItem("token");
+    var decoded = jwt_decode(token);
+    let url = decoded.type ? "mentor/" : "users/";
+    token = "Bearer " + token;
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: token
+    };
+    axios
+      .get(`${url}logout`, { headers: headers })
+      .then(res => {
+        localStorage.clear();
+        dispatch({ type: actionTypes.LOGOUT, user: {} });
+      })
+      .catch(err => console.log("Log out err", err));
   };
 
   let isAuth = false;
@@ -71,7 +109,8 @@ const UserState = props => {
         userState: userState,
         isAuth: isAuth,
         signup: signUpHandler,
-        logout: logoutHandler
+        logout: logoutHandler,
+        tryAutoLogin: tryAutoLogin
       }}
     >
       {props.children}

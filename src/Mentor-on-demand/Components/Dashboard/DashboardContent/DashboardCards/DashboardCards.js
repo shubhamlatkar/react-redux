@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Container, Row, Col, Figure } from "react-bootstrap";
+import { Card, Container, Row, Col, Figure, Badge } from "react-bootstrap";
 import "../../../../scss/style.scss";
 import { Link } from "react-router-dom";
 
@@ -14,9 +14,10 @@ const DashboardCard = props => {
       <Card className="course-card">
         <Card.Header className="card-header">
           <Link to={"/dashboard/course/" + props.user._id}>
-            <h3>
-              {user.title}...<span className="know-more">know more</span>
-            </h3>
+            <div className="d-inline-block mr-auto">
+              <h3>{user.title}</h3>
+            </div>
+            <Badge variant="secondary">Enroll Now</Badge>
           </Link>
         </Card.Header>
         <Card.Body>

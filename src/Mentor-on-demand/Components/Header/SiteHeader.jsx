@@ -12,7 +12,7 @@ const SiteHeader = props => {
   const onClickHandler = e => {
     if (isAuth) {
       userContext.logout();
-      props.history.push("/");
+      props.history.push("/dashboard");
     } else props.history.push("/login");
   };
 

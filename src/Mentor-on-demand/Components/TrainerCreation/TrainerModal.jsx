@@ -6,7 +6,7 @@ const TrainerModal = props => {
   const [show, setShow] = useState(true);
 
   const handleClose = () => {
-    props.history.push("/");
+    props.history.push("/signup");
     setShow(false);
   };
   const handleShow = () => setShow(true);
@@ -15,7 +15,7 @@ const TrainerModal = props => {
     <React.Fragment>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{props.match.params.id}</Modal.Title>
+          <Modal.Title>Name</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <TrainerForm />

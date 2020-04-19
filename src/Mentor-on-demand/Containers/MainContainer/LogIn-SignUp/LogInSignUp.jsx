@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, Nav } from "react-bootstrap";
-import { Route, Switch } from "react-router";
+import { Route, Switch, withRouter } from "react-router";
 
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import { NavLink } from "react-router-dom";
+import TrainerModal from "../../../Components/TrainerCreation/TrainerModal";
 
 const LogInSignUp = props => {
   const cardStyles = {
@@ -31,10 +32,9 @@ const LogInSignUp = props => {
           </Nav>
         </Card.Header>
         <Card.Body>
-          <Switch>
-            <Route path="/login" component={LogIn} />
-            <Route path="/signup" component={SignUp} />
-          </Switch>
+          <Route path="/login" component={LogIn} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/signup/mentor" component={TrainerModal} />
         </Card.Body>
       </Card>
       <br />
@@ -42,4 +42,4 @@ const LogInSignUp = props => {
   );
 };
 
-export default LogInSignUp;
+export default withRouter(LogInSignUp);

@@ -1,5 +1,6 @@
 import React from "react";
-import { Navbar, ButtonGroup, Button, Container } from "react-bootstrap";
+import { Navbar, ButtonGroup, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const PersonalHeader = props => {
   return (
@@ -9,9 +10,18 @@ const PersonalHeader = props => {
           Brand link
         </Navbar.Brand>
         <ButtonGroup aria-label="Basic example">
-          <Button variant="secondary">Left</Button>
-          <Button variant="secondary">Middle</Button>
-          <Button variant="secondary">Right</Button>
+          <Link variant="secondary" to="/dashboard">
+            dashboard
+          </Link>
+          <Link variant="secondary" to="/dashboard/notifications">
+            notifications
+          </Link>
+          <Link variant="secondary" to="/dashboard/trainings">
+            trainings
+          </Link>
+          <Link variant="secondary" to="/dashboard">
+            Edit
+          </Link>
         </ButtonGroup>
       </Container>
     </Navbar>

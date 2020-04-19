@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import SiteHeader from "../../Components/Header/SiteHeader";
 import SiteFooter from "../../Components/Footer/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import {
   Card,
   Form,
@@ -6,7 +6,8 @@ import {
   ToggleButton,
   ButtonGroup,
   Spinner,
-  Alert
+  Alert,
+  Container
 } from "react-bootstrap";
 import "./LogIn.css";
 import UserContext from "../../../Store/Contexts/UserContext";
@@ -37,7 +38,7 @@ const LogIn = React.memo(props => {
   };
 
   let logForm = (
-    <React.Fragment>
+    <Container className="">
       <Card.Title>
         <h2>Log In</h2>
       </Card.Title>
@@ -88,7 +89,7 @@ const LogIn = React.memo(props => {
           Submit
         </Button>
       </Form>
-    </React.Fragment>
+    </Container>
   );
   logForm =
     userContext.userState && userContext.userState.loading ? (
@@ -101,9 +102,9 @@ const LogIn = React.memo(props => {
   if (userContext.isAuth) {
     logForm =
       userContext.userState && userContext.userState.type ? (
-        <Redirect to="/dashboard/notifications" />
-      ) : (
         <Redirect to="/dashboard" />
+      ) : (
+        <Redirect to="/dashboard/course" />
       );
   }
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Form, Row, Col } from "react-bootstrap";
+import { Container, Form, Row, Col, Button } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 
 const TrainerForm = props => {
   return (
@@ -75,4 +76,4 @@ const TrainerForm = props => {
   );
 };
 
-export default TrainerForm;
+export default withRouter(TrainerForm);

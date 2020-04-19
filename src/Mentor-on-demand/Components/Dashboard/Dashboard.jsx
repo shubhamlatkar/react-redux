@@ -16,24 +16,29 @@ const Dashboard = props => {
   const courseContext = useContext(CourseContext);
   const userContext = useContext(UserContext);
   let { courses, getCourses } = courseContext;
+  let { tryAutoLogin } = userContext;
+
+  useEffect(() => {
+    tryAutoLogin();
+  }, [tryAutoLogin]);
 
   useEffect(() => {
     getCourses();
   }, [getCourses]);
 
-  let spinner = (
-    <Spinner animation="border" role="status">
-      <span className="sr-only">Loading...</span>
-    </Spinner>
-  );
-
   let displayRoutes = (
     <React.Fragment>
       <GeneralHeader />
       <Banner />
-      {/* <DashboardContent posts={courses ? courses : spinner} />
-      <Route path="/dashboard/course/:id" component={MyModal} /> */}
-      <CourseCreationForm />
+      {courses.length > 0 ? (
+        <DashboardContent posts={courses ? courses : []} />
+      ) : (
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      )}
+
+      <Route path="/dashboard/course/:id" component={MyModal} />
     </React.Fragment>
   );
 
@@ -43,6 +48,7 @@ const Dashboard = props => {
         <React.Fragment>
           <PersonalHeader />
           <Banner />
+          <Route path="/dashboard" exact component={CourseCreationForm} />
           <Route path="/dashboard/notifications" component={Notifications} />
           <Route path="/dashboard/trainings" component={Trainings} />
         </React.Fragment>
@@ -50,7 +56,19 @@ const Dashboard = props => {
         <React.Fragment>
           <PersonalHeader />
           <Banner />
-          <DashboardContent posts={courses ? courses : spinner} />
+          <Route
+            path="/dashboard"
+            exact
+            component={() => {
+              return courses.length > 0 ? (
+                <DashboardContent posts={courses ? courses : []} />
+              ) : (
+                <Spinner animation="border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </Spinner>
+              );
+            }}
+          />
           <Route path="/dashboard/course/:id" component={MyModal} />
           <Route path="/dashboard/notifications" component={Notifications} />
           <Route path="/dashboard/trainings" component={Trainings} />
