@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import CurrentTrainings from "./CurrentTrainings/CurrentTrainings";
 import CompletedTrainings from "./CompletedTrainings/CompletedTrainings";
+import CourseContext from "../../Store/Contexts/CourseContext";
+import UserContext from "../../Store/Contexts/UserContext";
+import { Spinner } from "react-bootstrap";
 
 const Trainings = props => {
+  const courseContext = useContext(CourseContext);
+  let { getMyCourses, courseState } = courseContext;
+
+  const userContext = useContext(UserContext);
+  let { userState } = userContext;
+
+  useEffect(() => {
+    if (userState) getMyCourses();
+  }, [userState, getMyCourses]);
+
+  // useEffect(() => {
+  //   console.log("courseState", courseState);
+  // }, [courseState]);
+
+  let diplayCurrentTrainings =
+    courseState.myCourses.length > 0 ? (
+      courseState.myCourses.map(course => (
+        <CurrentTrainings key={course._id} course={course} />
+      ))
+    ) : (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    );
+
   return (
     <React.Fragment>
-      <CurrentTrainings />
+      {diplayCurrentTrainings}
       <CompletedTrainings />
     </React.Fragment>
   );

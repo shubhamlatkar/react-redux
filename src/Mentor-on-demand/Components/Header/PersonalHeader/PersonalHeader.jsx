@@ -1,27 +1,37 @@
-import React from "react";
-import { Navbar, ButtonGroup, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Navbar, ButtonGroup, Container, Button } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
+import UserContext from "../../../Store/Contexts/UserContext";
 
 const PersonalHeader = props => {
+  const userContext = useContext(UserContext);
   return (
     <Navbar className="general-header">
       <Container>
         <Navbar.Brand className="mr-auto" href="#home">
-          Brand link
+          {userContext.userStatemyUser.name}
         </Navbar.Brand>
-        <ButtonGroup aria-label="Basic example">
-          <Link variant="secondary" to="/dashboard">
-            dashboard
-          </Link>
-          <Link variant="secondary" to="/dashboard/notifications">
+        <ButtonGroup className="general-header-link" aria-label="Basic example">
+          <Button as={NavLink} to="/dashboard" id="general-header-link">
+            New Course
+          </Button>
+          <Button
+            as={NavLink}
+            to="/dashboard/notifications"
+            id="general-header-link"
+          >
             notifications
-          </Link>
-          <Link variant="secondary" to="/dashboard/trainings">
+          </Button>
+          <Button
+            as={NavLink}
+            to="/dashboard/trainings"
+            id="general-header-link"
+          >
             trainings
-          </Link>
-          <Link variant="secondary" to="/dashboard">
+          </Button>
+          <Button as={NavLink} to="/dashboard" id="general-header-link">
             Edit
-          </Link>
+          </Button>
         </ButtonGroup>
       </Container>
     </Navbar>

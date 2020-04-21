@@ -104,7 +104,7 @@ const LogIn = React.memo(props => {
       userContext.userState && userContext.userState.type ? (
         <Redirect to="/dashboard" />
       ) : (
-        <Redirect to="/dashboard/course" />
+        <Redirect to="/dashboard" />
       );
   }
 

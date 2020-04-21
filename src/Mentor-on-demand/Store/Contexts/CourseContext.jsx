@@ -3,9 +3,10 @@ import React from "react";
 const CourseContext = React.createContext({
   courses: [],
   getCourses: () => {},
-  getMentor: () => {},
-  mentor: {},
-  addCourse: () => {}
+  addCourse: () => {},
+  enrollCourse: _id => {},
+  getMyCourses: () => {},
+  courseState: {}
 });
 
 export default CourseContext;

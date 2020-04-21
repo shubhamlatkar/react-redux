@@ -1,6 +1,5 @@
 import React, { useReducer, useCallback } from "react";
 import axios from "../Axios/baseAxios";
-import * as jwt from "jwt-decode";
 import * as actionTypes from "../action-types";
 import UserContext from "../Contexts/UserContext";
 import UserReducer, { initState } from "../Reducers/UserReducer";
@@ -10,34 +9,33 @@ const UserState = props => {
 
   const tryAutoLogin = useCallback(async () => {
     let token = localStorage.getItem("token");
-    var decoded = jwt.jwt_decode(token);
-    let url = decoded.type ? "mentor/" : "users/";
-    token = "Bearer " + token;
-    let headers = {
-      "Content-Type": "application/json",
-      Authorization: token
-    };
-    axios
-      .get(url + "me", { headers: headers })
-      .then(res => {
-        let user = res.data;
-        user.isAuth = true;
-        user.loading = false;
-        user.type = decoded.type;
-        dispatch({ type: actionTypes.LOGIN, user });
-      })
-      .catch(err => {
-        let user = { loading: false, error: "invalid cred", isAuth: false };
-        dispatch({ type: actionTypes.LOGIN, user });
-      });
+    if (token) {
+      token = "Bearer " + token;
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: token
+      };
+      axios
+        .get("users/me", { headers: headers })
+        .then(res => {
+          let user = res.data;
+          user.isAuth = true;
+          user.loading = false;
+          user.type = res.data.myUser.type;
+          dispatch({ type: actionTypes.LOGIN, user });
+        })
+        .catch(err => {
+          let user = { loading: false, error: "invalid cred", isAuth: false };
+          dispatch({ type: actionTypes.LOGIN, user });
+        });
+    }
   }, []);
 
   const loginHandler = (email, password, type) => {
     let user = { loading: true, isAuth: false };
     dispatch({ type: actionTypes.LOGIN, user });
-    let url = type ? "mentor/" : "users/";
     axios
-      .post(url + "login", {
+      .post("users/login", {
         email: email,
         password: password
       })
@@ -49,13 +47,13 @@ const UserState = props => {
           "Content-Type": "application/json",
           Authorization: token
         };
-        return axios.get(url + "me", { headers: headers });
+        return axios.get("users/me", { headers: headers });
       })
       .then(res => {
         let user = res.data;
         user.isAuth = true;
         user.loading = false;
-        user.type = type;
+        user.type = res.data.myUser.type;
         dispatch({ type: actionTypes.LOGIN, user });
       })
       .catch(err => {
@@ -64,35 +62,35 @@ const UserState = props => {
       });
   };
 
-  const signUpHandler = (name, email, password, type) => {
-    let url = type ? "mentor/" : "users/";
+  const signUpHandler = user => {
     axios
-      .post(url, {
-        name: name,
-        email: email,
-        password: password
+      .post("users/", {
+        ...user
       })
       .then(res => {
         let token = res.data.token;
         localStorage.setItem("token", token);
+        let user = res.data.res;
+        user.isAuth = true;
+        user.loading = false;
+        user.type = res.data.res.type;
+        dispatch({ type: actionTypes.LOGIN, user });
       })
       .catch(err => console.log("signup err", err));
   };
 
   const logoutHandler = () => {
     let token = localStorage.getItem("token");
-    var decoded = jwt_decode(token);
-    let url = decoded.type ? "mentor/" : "users/";
     token = "Bearer " + token;
     let headers = {
       "Content-Type": "application/json",
       Authorization: token
     };
     axios
-      .get(`${url}logout`, { headers: headers })
+      .get("users/logout", { headers: headers })
       .then(res => {
         localStorage.clear();
-        dispatch({ type: actionTypes.LOGOUT, user: {} });
+        dispatch({ type: actionTypes.LOGOUT });
       })
       .catch(err => console.log("Log out err", err));
   };

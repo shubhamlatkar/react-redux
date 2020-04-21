@@ -34,7 +34,7 @@ const SignUp = props => {
         <h2>Sign Up</h2>
       </Card.Title>
       <Form>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control
             onChange={e => onChangeHandler(e)}
@@ -43,7 +43,7 @@ const SignUp = props => {
             placeholder="Enter Name"
           />
         </Form.Group>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label>Email address</Form.Label>
           <Form.Control
             onChange={e => onChangeHandler(e)}
@@ -56,7 +56,7 @@ const SignUp = props => {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control
             onChange={e => onChangeHandler(e)}

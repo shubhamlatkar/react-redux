@@ -42,6 +42,18 @@ const CourseCreationForm = props => {
       label: "Lectures",
       value: String,
       placeholder: "Course Lectures"
+    },
+    TotalPayment: {
+      name: "TotalPayment",
+      label: "Total Payment",
+      value: String,
+      placeholder: "Total Payment"
+    },
+    topics: {
+      name: "topics",
+      label: "Topics to be covered",
+      value: String,
+      placeholder: "Enter topics comma seperated"
     }
   });
 
@@ -55,11 +67,22 @@ const CourseCreationForm = props => {
   const onSubmitHandler = event => {
     event.preventDefault();
     var temCourse = Object.keys(course).reduce(function(obj, k) {
-      obj[course[k].name] = course[k].value;
+      if (course[k].name !== "topics" && course[k].name !== "TotalPayment")
+        obj[course[k].name] = course[k].value;
       return obj;
     }, {});
+
+    let topics = course.topics.value.split(",").map(topic => {
+      return { name: topic, status: false };
+    });
+    temCourse.topics = topics;
+    temCourse.trainerDetails = {
+      TotalPayment: course.TotalPayment.value
+    };
     addCourse(temCourse);
+    props.history.push("/dashboard/trainings");
   };
+
   let form = Object.keys(course).map(key => (
     <MyInput
       key={course[key].name}
@@ -71,6 +94,7 @@ const CourseCreationForm = props => {
       value={course[key].value}
     />
   ));
+
   return (
     <Container className="text-left form-container">
       <Form>

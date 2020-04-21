@@ -4,13 +4,13 @@ import { Form, Row, Col } from "react-bootstrap";
 const MyInput = props => {
   return (
     <fieldset>
-      <Form.Group as={Row} controlId="formHorizontalEmail">
+      <Form.Group as={Row}>
         <Form.Label column sm={2}>
           {props.label}
         </Form.Label>
         <Col sm={10}>
           <Form.Control
-            type="text"
+            type={props.type}
             name={props.name}
             onChange={props.onChangeHandler}
             value={props.valuee}
