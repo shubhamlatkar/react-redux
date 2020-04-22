@@ -35,8 +35,10 @@ const CourseState = props => {
       .catch(err => console.log("course put err", err));
   }, []);
 
-  const getCourses = useCallback((skip, limit) => {
-    let url = `/cources?skip=${skip}&limit=${limit}`;
+  const getCourses = useCallback((skip, limit, filterBy) => {
+    let url = "";
+    if (filterBy) url = `/cources?filterBy=${filterBy}`;
+    else url = `/cources?skip=${skip}&limit=${limit}`;
     axios
       .get(url)
       .then(res => {

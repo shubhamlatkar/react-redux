@@ -117,7 +117,7 @@
   }
   &-btn:active {
     color: #fff;
-    background-color: #f09a78 !important ; 
+    background-color: #f09a78; 
     border-color: #333;
   }
 
@@ -162,5 +162,49 @@
     color: #fff;
     box-shadow: none;
   }
- }
+}
+}
+
+.footer {
+  bottom: 0;
+  a {
+    color: #d3420e;
+  }
+  
+  a:hover {
+    color:#ff7f50;
+  }
+}
+
+#custom-login-form {
+  &-btn {
+    background: #fa6630;
+    color: #333;
+    border-color: #333;
+    &:hover {
+      background: #f37446;
+      
+    }
+    &:focus {
+      border-color: #d3420e;
+      background: #ff7f51;
+      color: #fff;
+      box-shadow: none;
+    }
+  }
+}
+
+.login-signup-card {
+  margin-bottom: 3%;
+  max-width: 500px;
+  width: 80%;
+  margin: 17% auto;
+
+  &-link {
+    color: #d3420e;
+  }
+
+  &-link:hover {
+    color:#ff7f50;
+  }
 }

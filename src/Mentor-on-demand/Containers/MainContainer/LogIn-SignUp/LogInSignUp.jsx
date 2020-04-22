@@ -8,24 +8,26 @@ import { NavLink } from "react-router-dom";
 import TrainerModal from "../../../Components/TrainerCreation/TrainerModal";
 
 const LogInSignUp = props => {
-  const cardStyles = {
-    marginBottom: "3%",
-    maxWidth: "500px",
-    width: "80%",
-    margin: "17% auto"
-  };
   return (
     <React.Fragment>
-      <Card style={cardStyles}>
+      <Card className="login-signup-card">
         <Card.Header>
           <Nav fill justify variant="tabs" defaultActiveKey="/login">
             <Nav.Item>
-              <Nav.Link as={NavLink} to="/login">
+              <Nav.Link
+                as={NavLink}
+                to="/login"
+                className="login-signup-card-link"
+              >
                 Login
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={NavLink} to="/signup">
+              <Nav.Link
+                as={NavLink}
+                to="/signup"
+                className="login-signup-card-link"
+              >
                 SignUp
               </Nav.Link>
             </Nav.Item>

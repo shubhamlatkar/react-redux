@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Navbar, ButtonGroup, Container, Button } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import UserContext from "../../../Store/Contexts/UserContext";
 
 const PersonalHeader = props => {
@@ -9,7 +9,9 @@ const PersonalHeader = props => {
     <Navbar className="general-header">
       <Container>
         <Navbar.Brand className="mr-auto" href="#home">
-          {userContext.userStatemyUser.name}
+          {userContext.userState.myUser
+            ? userContext.userState.myUser.name
+            : null}
         </Navbar.Brand>
         <ButtonGroup className="general-header-link" aria-label="Basic example">
           <Button as={NavLink} to="/dashboard" id="general-header-link">

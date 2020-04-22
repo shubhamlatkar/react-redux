@@ -33,7 +33,7 @@ const SignUp = props => {
       <Card.Title>
         <h2>Sign Up</h2>
       </Card.Title>
-      <Form>
+      <Form id="custom-login-form">
         <Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -76,12 +76,18 @@ const SignUp = props => {
               value={user.type}
               checked={user.type}
               onChange={event => toggleUserHandler(event)}
+              id="custom-login-form-btn"
             >
               {user.type ? "Mentor" : "Student"}
             </ToggleButton>
           </ButtonGroup>
         </Form.Group>
-        <Button onClick={e => submitHandler(e)} variant="primary" type="submit">
+        <Button
+          id="custom-login-form-btn"
+          onClick={e => submitHandler(e)}
+          variant="primary"
+          type="submit"
+        >
           Sign Up
         </Button>
       </Form>

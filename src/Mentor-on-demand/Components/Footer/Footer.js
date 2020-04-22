@@ -1,11 +1,8 @@
 import React from "react";
 import { Navbar, Container, Row, Col } from "react-bootstrap";
 const Footer = props => {
-  const footerStyles = {
-    bottom: 0
-  };
   return (
-    <footer style={footerStyles}>
+    <footer className="footer">
       <Navbar bg="dark" varient="dark" expand="xl">
         <Container>
           <Row

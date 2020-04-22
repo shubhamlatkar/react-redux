@@ -43,6 +43,13 @@ const Dashboard = props => {
     getCourses(val, 2);
   };
 
+  const handelFilterChange = value => {
+    if (!value) {
+      getCourses(0, 2);
+      setCurrPage(0);
+    } else getCourses(null, null, value);
+  };
+
   useEffect(() => {
     tryAutoLogin();
   }, [tryAutoLogin]);
@@ -62,7 +69,7 @@ const Dashboard = props => {
   useEffect(() => {
     let temDisplayRoutes = (
       <React.Fragment>
-        <GeneralHeader />
+        <GeneralHeader handelFilterChange={handelFilterChange} />
         <Banner />
         {courseState.courses.length > 0 ? (
           <Container>

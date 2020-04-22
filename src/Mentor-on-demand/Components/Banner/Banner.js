@@ -1,12 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Jumbotron,
-  Container,
-  Button,
-  Row,
-  Col,
-  Navbar
-} from "react-bootstrap";
+import { Jumbotron, Container, Button, Row, Col } from "react-bootstrap";
 import UserContext from "../../Store/Contexts/UserContext";
 import { NavLink } from "react-router-dom";
 
@@ -30,7 +23,7 @@ export const Banner = props => {
             {userContext.userState ? (
               <React.Fragment>
                 <h4>
-                  Welcome back subscribe here for weekly news letters
+                  Subscribe here for weekly news letters{" "}
                   <Button id="general-banner-link" as={NavLink} to="/dashboard">
                     Subscribe
                   </Button>
