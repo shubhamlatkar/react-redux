@@ -31,7 +31,7 @@ const UserState = props => {
     }
   }, []);
 
-  const loginHandler = (email, password, type) => {
+  const loginHandler = (email, password) => {
     let user = { loading: true, isAuth: false };
     dispatch({ type: actionTypes.LOGIN, user });
     axios
@@ -63,6 +63,8 @@ const UserState = props => {
   };
 
   const signUpHandler = user => {
+    let temUser = { loading: true, isAuth: false };
+    dispatch({ type: actionTypes.LOGIN, temUser });
     axios
       .post("users/", {
         ...user
@@ -95,6 +97,19 @@ const UserState = props => {
       .catch(err => console.log("Log out err", err));
   };
 
+  const updateUser = useCallback(user => {
+    let token = localStorage.getItem("token");
+    token = "Bearer " + token;
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: token
+    };
+    axios
+      .patch("/users/me", { ...user }, { headers: headers })
+      .then(res => console.log("res user patch", res))
+      .catch(err => console.log("user pathch err", err));
+  }, []);
+
   let isAuth = false;
   if (userState && userState.isAuth) {
     isAuth = true;
@@ -108,7 +123,8 @@ const UserState = props => {
         isAuth: isAuth,
         signup: signUpHandler,
         logout: logoutHandler,
-        tryAutoLogin: tryAutoLogin
+        tryAutoLogin: tryAutoLogin,
+        updateUser: updateUser
       }}
     >
       {props.children}

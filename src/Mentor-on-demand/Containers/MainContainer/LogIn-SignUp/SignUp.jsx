@@ -1,7 +1,15 @@
 import React, { useState, useContext } from "react";
-import { Card, Form, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
+import {
+  Card,
+  Form,
+  Button,
+  ButtonGroup,
+  ToggleButton,
+  Spinner
+} from "react-bootstrap";
 import "./LogIn.css";
 import UserContext from "../../../Store/Contexts/UserContext";
+import { Redirect } from "react-router-dom";
 
 const SignUp = props => {
   const userContext = useContext(UserContext);
@@ -26,9 +34,14 @@ const SignUp = props => {
 
   const submitHandler = event => {
     event.preventDefault();
-    userContext.signup(user.name, user.email, user.password, user.type);
+    userContext.signup({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      type: user.type
+    });
   };
-  return (
+  let logForm = (
     <React.Fragment>
       <Card.Title>
         <h2>Sign Up</h2>
@@ -93,6 +106,23 @@ const SignUp = props => {
       </Form>
     </React.Fragment>
   );
+  logForm =
+    userContext.userState && userContext.userState.loading ? (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    ) : (
+      logForm
+    );
+  if (userContext.isAuth) {
+    logForm =
+      userContext.userState && userContext.userState.type ? (
+        <Redirect to="/dashboard" />
+      ) : (
+        <Redirect to="/dashboard" />
+      );
+  }
+  return logForm;
 };
 
 export default SignUp;

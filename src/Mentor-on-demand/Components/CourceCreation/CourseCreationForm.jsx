@@ -10,49 +10,49 @@ const CourseCreationForm = props => {
     title: {
       name: "title",
       label: "Title",
-      value: String,
+      value: "",
       placeholder: "Course Title"
     },
     description: {
       name: "description",
       label: "Description",
-      value: String,
+      value: "",
       placeholder: "Course description"
     },
     fee: {
       name: "fee",
       label: "Fee",
-      value: String,
+      value: "",
       placeholder: "Course Fee"
     },
     levels: {
       name: "levels",
       label: "Levels",
-      value: String,
+      value: "",
       placeholder: "Course Levels"
     },
     duration: {
       name: "duration",
       label: "Duration",
-      value: String,
+      value: "",
       placeholder: "Course Duration"
     },
     lectures: {
       name: "lectures",
       label: "Lectures",
-      value: String,
+      value: "",
       placeholder: "Course Lectures"
     },
     TotalPayment: {
       name: "TotalPayment",
       label: "Total Payment",
-      value: String,
+      value: "",
       placeholder: "Total Payment"
     },
     topics: {
       name: "topics",
       label: "Topics to be covered",
-      value: String,
+      value: "",
       placeholder: "Enter topics comma seperated"
     }
   });

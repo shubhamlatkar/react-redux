@@ -95,14 +95,18 @@ const TrainerModal = props => {
     />
   ));
 
-  if (isAuth && userState.loading)
-    form = (
+  form =
+    userContext.userState && userContext.userState.loading ? (
       <Spinner animation="border" role="status">
         <span className="sr-only">Loading...</span>
       </Spinner>
+    ) : (
+      form
     );
 
-  if (isAuth && !userState.loading) form = <Redirect to="/dashboard" />;
+  if (userContext.isAuth) {
+    form = <Redirect to="/dashboard" />;
+  }
 
   const onSubmitHandler = event => {
     event.preventDefault();

@@ -1,14 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  Card,
-  Form,
-  Button,
-  ToggleButton,
-  ButtonGroup,
-  Spinner,
-  Alert,
-  Container
-} from "react-bootstrap";
+import { Card, Form, Button, Spinner, Alert, Container } from "react-bootstrap";
 import "./LogIn.css";
 import UserContext from "../../../Store/Contexts/UserContext";
 import { withRouter, Redirect } from "react-router";

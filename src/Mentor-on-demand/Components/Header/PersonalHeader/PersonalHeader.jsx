@@ -31,7 +31,7 @@ const PersonalHeader = props => {
           >
             trainings
           </Button>
-          <Button as={NavLink} to="/dashboard" id="general-header-link">
+          <Button as={NavLink} to="/dashboard/edit" id="general-header-link">
             Edit
           </Button>
         </ButtonGroup>

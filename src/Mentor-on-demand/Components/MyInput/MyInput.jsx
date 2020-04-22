@@ -13,7 +13,7 @@ const MyInput = props => {
             type={props.type}
             name={props.name}
             onChange={props.onChangeHandler}
-            value={props.valuee}
+            value={props.value}
             placeholder={props.placeholder}
           />
         </Col>

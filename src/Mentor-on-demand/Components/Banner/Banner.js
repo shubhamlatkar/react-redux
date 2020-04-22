@@ -14,9 +14,7 @@ export const Banner = props => {
           <Col xs={12} md={6} className="d-flex flex-row">
             <h2>
               Welcome{" "}
-              {userContext.userState
-                ? userContext.userState.myUser.name
-                : "Guest"}
+              {userContext.isAuth ? userContext.userState.myUser.name : "Guest"}
             </h2>
           </Col>
           <Col xs={12} md={6} className="d-flex flex-row-reverse">
