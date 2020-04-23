@@ -8,7 +8,7 @@ import { Spinner } from "react-bootstrap";
 const Trainings = props => {
   const courseContext = useContext(CourseContext);
   let { getMyCourses, courseState } = courseContext;
-
+  let { myCourses } = courseState;
   const userContext = useContext(UserContext);
   let { userState } = userContext;
 
@@ -21,8 +21,8 @@ const Trainings = props => {
   // }, [courseState]);
 
   let diplayCurrentTrainings =
-    courseState.myCourses.length > 0 ? (
-      courseState.myCourses.map(course => (
+    myCourses.length > 0 ? (
+      myCourses.map(course => (
         <CurrentTrainings key={course._id} course={course} />
       ))
     ) : (
