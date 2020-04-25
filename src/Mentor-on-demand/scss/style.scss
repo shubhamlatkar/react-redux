@@ -53,19 +53,42 @@
   min-height: 4rem;
   background: coral;
 
-  .logIn-button {
-    color: #333;
-    background: #fa4300;
-    border: 1px solid #333;
+  .button {
+    text-decoration: none;
+    color: #be3807;
+    padding:  0.5rem 0.8rem;
+    border-bottom: 0.2rem transparent solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: transparent;
+
+    &:hover {
+      text-decoration: none;
+      color: #d3420e;
+      background: #f37446;
+      border-bottom: 0.2rem  #ec5f2b solid;
+    }
+    &:focus {
+      border-bottom: 0.2rem #be3807 solid;
+      outline: none;
+    }
+
+    &:active {
+      border-bottom: 0.2rem #be3807 solid;
+    }
   }
-  .logIn-button:hover {
-    border: 1px solid #333;
-    background: #f09a78;
-  }
-  .logIn-button:active {
-    color: #fff;
-    background-color: #f09a78;
-    border-color: #333;
+  .search-form {
+    display: inline-block;
+    margin-right: 1rem;
+    input {
+      width: auto;
+      display: inline;
+      margin-right: 0.4rem;
+    }
+    button {
+      display: inline;
+    }
   }
 }
 
@@ -86,23 +109,21 @@
     background-color: #f09a78 !important ; 
     border-color: #333;
   }
-
-  #general-header-link {
-    background: #fa6630;
-    color: #333;
-    border-color: #333;
+  &-links {
+    text-decoration: none;
+    color: #be3807;
+    padding:  0.5rem 0.8rem;
+    border-bottom: 0.2rem transparent solid;
     &:hover {
+      text-decoration: none;
+      color: #d3420e;
       background: #f37446;
-      
+      border-bottom: 0.2rem  #ec5f2b solid;
     }
     &:focus {
-      border-color: #d3420e;
-      background: #ff7f51;
-      color: #fff;
-      box-shadow: none;
+      border-bottom: 0.2rem #be3807 solid;
     }
   }
-
 }
 
 .form-container {

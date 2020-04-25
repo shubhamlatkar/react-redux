@@ -97,7 +97,7 @@ const EditForm = props => {
     ) : (
       form
     );
-  if (userContext.isAuth) {
+  if (!userContext.isAuth) {
     form = <Redirect to="/dashboard" />;
   }
 

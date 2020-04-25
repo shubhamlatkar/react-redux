@@ -1,12 +1,21 @@
-import React, { useContext } from "react";
-import { Button, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import {
+  Button,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Form,
+  FormControl
+} from "react-bootstrap";
+import { withRouter, Link } from "react-router-dom";
 import UserContext from "../../Store/Contexts/UserContext";
 
 import "../../scss/style.scss";
 
 const SiteHeader = props => {
   const userContext = useContext(UserContext);
+  const [filterBy, setFilterby] = useState("");
+
   let { isAuth } = userContext;
 
   const onClickHandler = e => {
@@ -33,9 +42,48 @@ const SiteHeader = props => {
               <NavDropdown.Item href="#action/3.4">Address</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Button onClick={onClickHandler} className="logIn-button">
+          {/* <Button onClick={onClickHandler} className="button">
             {isAuth ? "LogOut" : "LogIn"}
-          </Button>
+          </Button> */}
+          <div>
+            {isAuth ? (
+              <React.Fragment>
+                <Link className="button" to="/dashboard/profile">
+                  profile
+                </Link>
+                <Link className="button" to="/dashboard/trainings">
+                  trainings
+                </Link>
+                <Link className="button" to="/dashboard/notifications">
+                  notifications
+                </Link>
+                <Link className="button" to="/dashboard">
+                  New Course
+                </Link>
+              </React.Fragment>
+            ) : (
+              <Form className="search-form">
+                <FormControl
+                  type="text"
+                  placeholder="Search"
+                  value={filterBy}
+                  onChange={event => setFilterby(event.target.value)}
+                />
+                <Button
+                  className="general-header-search-btn"
+                  onClick={event => {
+                    props.handelFilterChange(filterBy);
+                    setFilterby("");
+                  }}
+                >
+                  Search
+                </Button>
+              </Form>
+            )}
+            <button className="button" onClick={onClickHandler}>
+              {isAuth ? "LogOut" : "LogIn"}
+            </button>
+          </div>
         </Navbar.Collapse>
       </Navbar>
     </header>

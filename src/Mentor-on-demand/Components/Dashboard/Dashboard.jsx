@@ -107,13 +107,13 @@ const Dashboard = props => {
             <PersonalHeader />
             <Banner />
             <Switch>
-              <Route path="/dashboard" exact component={CourseCreationForm} />
               <Route
                 path="/dashboard/notifications"
                 component={Notifications}
               />
               <Route path="/dashboard/trainings" component={Trainings} />
-              <Route path="/dashboard/edit" component={EditForm} />
+              <Route path="/dashboard/profile" component={EditForm} />
+              <Route path="/dashboard" exact component={CourseCreationForm} />
             </Switch>
           </React.Fragment>
         ) : (
