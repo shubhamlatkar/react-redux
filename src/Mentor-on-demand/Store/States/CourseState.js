@@ -14,6 +14,7 @@ const CourseState = props => {
       "Content-Type": "application/json",
       Authorization: token
     };
+    dispatch(actionCreators.loadingCourses());
     axios
       .get("cources/me", { headers: headers })
       .then(res => {
@@ -62,6 +63,28 @@ const CourseState = props => {
     }
   };
 
+  const patchCourse = useCallback(
+    course => {
+      delete course.createdAt;
+      delete course.updatedAt;
+      delete course.reviews;
+      delete course.__v;
+      let token = localStorage.getItem("token");
+      token = "Bearer " + token;
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: token
+      };
+      axios
+        .patch("/cources/" + course._id, { ...course }, { headers: headers })
+        .then(res => {
+          getMyCourses();
+        })
+        .catch(err => console.log("err", err));
+    },
+    [getMyCourses]
+  );
+
   return (
     <CourseContext.Provider
       value={{
@@ -70,7 +93,8 @@ const CourseState = props => {
         addCourse: addCourse,
         enrollCourse: enrollCourse,
         getMyCourses: getMyCourses,
-        courseState: courseState
+        courseState: courseState,
+        patchCourse: patchCourse
       }}
     >
       {props.children}

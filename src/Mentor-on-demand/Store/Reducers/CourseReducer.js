@@ -16,7 +16,10 @@ const CourseReducer = (state, action) => {
         coursesLength: action.response.coursesLength
       };
     case actionTypes.SET_MY_COURSES:
-      return { ...state, myCourses: action.response };
+      return { ...state, myCourses: action.response, isLoading: false };
+    case actionTypes.LOADING:
+      return { ...state, isLoading: true };
+
     default:
       return state;
   }

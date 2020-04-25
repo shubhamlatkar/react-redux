@@ -8,7 +8,7 @@ import { Spinner } from "react-bootstrap";
 const Trainings = props => {
   const courseContext = useContext(CourseContext);
   let { getMyCourses, courseState } = courseContext;
-  let { myCourses } = courseState;
+  let { myCourses, isLoading } = courseState;
   const userContext = useContext(UserContext);
   let { userState } = userContext;
 
@@ -20,17 +20,15 @@ const Trainings = props => {
   //   console.log("courseState", courseState);
   // }, [courseState]);
 
-  let diplayCurrentTrainings =
-    myCourses.length > 0 ? (
-      myCourses.map(course => (
-        <CurrentTrainings key={course._id} course={course} />
-      ))
-    ) : (
-      <Spinner animation="border" role="status">
-        <span className="sr-only">Loading...</span>
-      </Spinner>
-    );
-
+  let diplayCurrentTrainings = !isLoading ? (
+    myCourses.map(course => (
+      <CurrentTrainings key={course._id} course={course} />
+    ))
+  ) : (
+    <Spinner animation="border" role="status">
+      <span className="sr-only">Loading...</span>
+    </Spinner>
+  );
   return (
     <React.Fragment>
       {diplayCurrentTrainings}

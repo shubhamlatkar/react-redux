@@ -6,7 +6,8 @@ const CourseContext = React.createContext({
   addCourse: () => {},
   enrollCourse: _id => {},
   getMyCourses: () => {},
-  courseState: {}
+  courseState: {},
+  patchCourse: {}
 });
 
 export default CourseContext;
