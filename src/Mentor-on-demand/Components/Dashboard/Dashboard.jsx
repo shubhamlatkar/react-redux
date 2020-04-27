@@ -9,9 +9,9 @@ import UserContext from "../../Store/Contexts/UserContext";
 import Notifications from "../Notifications/Notifications";
 import Trainings from "../Trainings/Trainings";
 import GeneralHeader from "../Header/GeneralHeader/GeneralHeader";
-import PersonalHeader from "../Header/PersonalHeader/PersonalHeader";
 import CourseCreationForm from "../CourceCreation/CourseCreationForm";
 import EditForm from "../Edit/EditForm";
+import SiteHeader from "../Header/SiteHeader";
 
 const Dashboard = props => {
   const [currPage, setCurrPage] = useState(0);
@@ -19,12 +19,13 @@ const Dashboard = props => {
   const courseContext = useContext(CourseContext);
   const userContext = useContext(UserContext);
   let { courseState, getCourses } = courseContext;
+  let { isLoading } = courseState;
   let { tryAutoLogin, isAuth, userState } = userContext;
   let [displayRoutes, setDisplayRoutes] = useState(
     <React.Fragment>
       <GeneralHeader />
       <Banner />
-      {courseState.courses.length > 0 ? (
+      {!isLoading ? (
         <DashboardContent
           posts={courseState.courses ? courseState.courses : []}
         />
@@ -81,9 +82,9 @@ const Dashboard = props => {
   useEffect(() => {
     let temDisplayRoutes = (
       <React.Fragment>
-        <GeneralHeader handelFilterChange={handelFilterChange} />
+        <SiteHeader handelFilterChange={handelFilterChange} />
         <Banner />
-        {courseState.courses.length > 0 ? (
+        {!isLoading ? (
           <Container>
             <DashboardContent
               posts={courseState.courses ? courseState.courses : []}
@@ -104,7 +105,7 @@ const Dashboard = props => {
       temDisplayRoutes =
         userState && userState.type ? (
           <React.Fragment>
-            <PersonalHeader />
+            <SiteHeader handelFilterChange={handelFilterChange} />
             <Banner />
             <Switch>
               <Route
@@ -118,14 +119,14 @@ const Dashboard = props => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <PersonalHeader />
+            <SiteHeader handelFilterChange={handelFilterChange} />
             <Banner />
             <Switch>
               <Route
                 path="/dashboard"
                 exact
                 component={() => {
-                  return courseState.courses.length > 0 ? (
+                  return !isLoading ? (
                     <Container>
                       <DashboardContent
                         posts={courseState.courses ? courseState.courses : []}
@@ -145,7 +146,7 @@ const Dashboard = props => {
                 component={Notifications}
               />
               <Route path="/dashboard/trainings" component={Trainings} />
-              <Route path="/dashboard/edit" component={EditForm} />
+              <Route path="/dashboard/profile" component={EditForm} />
               <Redirect from="/" exact to="/dashboard" />
             </Switch>
           </React.Fragment>

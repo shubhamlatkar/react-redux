@@ -1,12 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  Button,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl
-} from "react-bootstrap";
+import { Button, Navbar, Nav, Form, FormControl } from "react-bootstrap";
 import { withRouter, Link } from "react-router-dom";
 import UserContext from "../../Store/Contexts/UserContext";
 
@@ -14,9 +7,9 @@ import "../../scss/style.scss";
 
 const SiteHeader = props => {
   const userContext = useContext(UserContext);
-  const [filterBy, setFilterby] = useState("");
+  let { isAuth, userState } = userContext;
 
-  let { isAuth } = userContext;
+  const [filterBy, setFilterby] = useState("");
 
   const onClickHandler = e => {
     if (isAuth) {
@@ -25,6 +18,27 @@ const SiteHeader = props => {
     } else props.history.push("/login");
   };
 
+  let form = props.handelFilterChange ? (
+    <Form className="search-form">
+      <button
+        className="button"
+        onClick={event => {
+          event.preventDefault();
+          props.handelFilterChange(filterBy);
+          setFilterby("");
+        }}
+      >
+        Search
+      </button>
+      <FormControl
+        type="text"
+        placeholder="Search"
+        value={filterBy}
+        onChange={event => setFilterby(event.target.value)}
+      />
+    </Form>
+  ) : null;
+
   return (
     <header>
       <Navbar className="main-navbar" fixed="top" expand="xl">
@@ -32,19 +46,9 @@ const SiteHeader = props => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Dashboard</Nav.Link>
-            <NavDropdown title="Contact Us" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Email</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Phone</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Fax</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Address</NavDropdown.Item>
-            </NavDropdown>
+            {userState && userState.myUser ? form : null}
           </Nav>
-          {/* <Button onClick={onClickHandler} className="button">
-            {isAuth ? "LogOut" : "LogIn"}
-          </Button> */}
+
           <div>
             {isAuth ? (
               <React.Fragment>
@@ -62,23 +66,7 @@ const SiteHeader = props => {
                 </Link>
               </React.Fragment>
             ) : (
-              <Form className="search-form">
-                <FormControl
-                  type="text"
-                  placeholder="Search"
-                  value={filterBy}
-                  onChange={event => setFilterby(event.target.value)}
-                />
-                <Button
-                  className="general-header-search-btn"
-                  onClick={event => {
-                    props.handelFilterChange(filterBy);
-                    setFilterby("");
-                  }}
-                >
-                  Search
-                </Button>
-              </Form>
+              form
             )}
             <button className="button" onClick={onClickHandler}>
               {isAuth ? "LogOut" : "LogIn"}

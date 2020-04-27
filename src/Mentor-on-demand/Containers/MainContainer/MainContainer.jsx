@@ -15,7 +15,6 @@ const MainContainer = props => {
     <div className="App" styles={appStyles}>
       <UserState>
         <Router>
-          <SiteHeader />
           <CourseState>
             <Switch>
               <Route path="/" exact component={Dashboard} />

@@ -8,6 +8,7 @@
     "axios": "0.19.2",
     "bootstrap": "4.4.1",
     "jwt-decode": "2.2.0",
+    "lodash.chunk": "4.2.0",
     "radium": "0.26.0",
     "react": "16.12.0",
     "react-bootstrap": "1.0.0",

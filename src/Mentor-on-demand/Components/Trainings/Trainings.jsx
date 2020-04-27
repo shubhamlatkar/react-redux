@@ -16,10 +16,6 @@ const Trainings = props => {
     if (userState) getMyCourses();
   }, [userState, getMyCourses]);
 
-  // useEffect(() => {
-  //   console.log("courseState", courseState);
-  // }, [courseState]);
-
   let diplayCurrentTrainings = !isLoading ? (
     myCourses.map(course => (
       <CurrentTrainings key={course._id} course={course} />

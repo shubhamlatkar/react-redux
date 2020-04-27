@@ -6,10 +6,13 @@ import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import { NavLink } from "react-router-dom";
 import TrainerModal from "../../../Components/TrainerCreation/TrainerModal";
+import SiteHeader from "../../../Components/Header/SiteHeader";
 
 const LogInSignUp = props => {
   return (
     <React.Fragment>
+      <SiteHeader handelFilterChange={null} />
+
       <Card className="login-signup-card">
         <Card.Header>
           <Nav fill justify variant="tabs" defaultActiveKey="/login">

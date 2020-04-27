@@ -40,6 +40,7 @@ const CourseState = props => {
     let url = "";
     if (filterBy) url = `/cources?filterBy=${filterBy}`;
     else url = `/cources?skip=${skip}&limit=${limit}`;
+    dispatch(actionCreators.loadingCourses());
     axios
       .get(url)
       .then(res => {

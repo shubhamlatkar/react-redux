@@ -84,7 +84,7 @@
     input {
       width: auto;
       display: inline;
-      margin-right: 0.4rem;
+      margin-left: 0.4rem;
     }
     button {
       display: inline;
@@ -169,6 +169,8 @@
 }
 
 #general-banner {
+  margin-top: 4rem;
+
  &-link {
   background: #fa6630;
   color: #333;
