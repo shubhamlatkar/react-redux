@@ -1,0 +1,44 @@
+.header {
+  display:grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  justify-items: center;
+
+  .heading {
+    grid-column-start: 1;
+    grid-column-end: 6;
+  }
+  .sign-in-btn {
+    border-right: 2px solid #c3d4db;
+  }
+  .sign-out-btn {
+    border-right: 2px solid #c3d4db;
+    width: 80px;
+  }
+}
+
+.login-signup-card {
+  margin-bottom: 3%;
+  max-width: 500px;
+  width: 80%;
+  margin: 5% auto;
+
+  .login-styles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }  
+}
+
+@media (max-width: 600px) {
+  .login-styles {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .header {
+    display:grid;
+    grid-template-columns: auto;
+    margin: auto;
+  
+  }
+}
