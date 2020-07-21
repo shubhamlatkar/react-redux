@@ -29,6 +29,12 @@
   }  
 }
 
+table {
+  max-width: 800px;
+  width: 80%;
+  margin: 5% auto;
+}
+
 @media (max-width: 600px) {
   .login-styles {
     flex-direction: row;

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import StudentState from "../../store/states/StudentState";
 import { Jumbotron, Spinner, Row, Button, ButtonGroup } from "react-bootstrap";
 import UserContext from "../../store/context/UserContext";
 import TableContent from "./TableContent/TableContent";
@@ -11,7 +12,7 @@ const Table = props => {
   let { tryAutoLogin, userState, logout, logoutAll } = userContext;
 
   useEffect(() => {
-    if (userState && !userState.isAuth) tryAutoLogin();
+    if (!userState || !userState.isAuth) tryAutoLogin();
   }, [tryAutoLogin]);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const Table = props => {
     }
   }, [userState && userState.isAuth, setAuth, userState && userState.loading]);
 
-  let tableContent = auth ? <TableContent /> : null;
+  let tableContent = auth ? <TableContent {...props} /> : null;
   tableContent = loading ? (
     <Spinner animation="border" role="status">
       <span className="sr-only">Loading...</span>
@@ -73,7 +74,7 @@ const Table = props => {
                 onClick={e => handelOnClick(e)}
                 className="sign-out-all-btn"
               >
-                LogOut All
+                LogOut from all devices
               </Button>
             </ButtonGroup>
           ) : (

@@ -1,6 +1,5 @@
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
-export const SET_COURSE = "SET_COURSE";
-export const SET_MY_COURSES = "SET_MY_COURSES";
 export const LOADING = "LOADING";
 export const SIGNUP = "SIGNUP";
+export const SET_STUDENTS = "SET_STUDENTS";

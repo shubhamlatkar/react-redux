@@ -109,6 +109,9 @@ const UserState = props => {
         })
         .then(res => {
           if (res.status == "200") {
+            user.token = res.data.accessToken;
+            user.type = res.data.type;
+            user.username = res.data.username;
             user.isAuth = true;
             user.loading = false;
             dispatch({ type: actionTypes.LOGIN, user });
