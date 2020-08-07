@@ -1,13 +1,12 @@
-import React, { useEffect, useContext } from "react";
-import SiteHeader from "../../Components/Header/SiteHeader";
-import SiteFooter from "../../Components/Footer/Footer";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "../../Components/Dashboard/Dashboard";
-import LogInSignUp from "./LogIn-SignUp/LogInSignUp";
-import UserState from "../../Store/States/UserState.";
+import SiteFooter from "../../Components/Footer/Footer";
 import CourseState from "../../Store/States/CourseState";
+import UserState from "../../Store/States/UserState.";
+import LogInSignUp from "./LogIn-SignUp/LogInSignUp";
 
-const MainContainer = props => {
+const MainContainer = (props) => {
   const appStyles = {
     height: "100vh"
   };
@@ -21,6 +20,7 @@ const MainContainer = props => {
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/login" component={LogInSignUp} />
               <Route path="/signup" component={LogInSignUp} />
+              <Route path="/**" exact component={Dashboard} />
             </Switch>
           </CourseState>
           <SiteFooter />

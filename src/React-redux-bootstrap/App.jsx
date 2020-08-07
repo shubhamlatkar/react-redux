@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import thunk from "redux-thunk";
 
 import Header from "./Components/Header/Header";
@@ -20,11 +20,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <Router>
           <Header />
           <Dashboard />
           <Footer />
-        </BrowserRouter>
+        </Router>
       </Provider>
     );
   }

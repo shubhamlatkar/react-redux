@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Redirect } from "react-router";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "../scss/styles.scss";
-import UserState from "../store/states/UserState";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
-import Table from "../components/Table/Table";
 import EditModal from "../components/EditModal/EditModal";
+import Table from "../components/Table/Table";
+import "../scss/styles.scss";
 import StudentState from "../store/states/StudentState";
-const MainContainer = React.memo(props => {
+import UserState from "../store/states/UserState";
+const MainContainer = React.memo((props) => {
   const appStyles = {
     height: "100vh"
   };
