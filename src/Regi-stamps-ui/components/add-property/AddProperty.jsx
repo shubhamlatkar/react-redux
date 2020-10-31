@@ -1,0 +1,348 @@
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Col, Form, InputGroup, Spinner } from "react-bootstrap";
+import AuthContext from "../../store/context/AuthContext";
+import PropertyContext from "../../store/context/PropertyContext";
+import Header from "../header/Header";
+
+const addProperty = (props) => {
+  const propertyContext = useContext(PropertyContext);
+  const { propertyState, postProperty } = propertyContext;
+  const { loading } = propertyState;
+
+  const userContext = useContext(AuthContext);
+  const { userState } = userContext;
+
+  const [property, setProperty] = useState({
+    address: {
+      name: "address",
+      value: "",
+      type: "text"
+    },
+    area: {
+      name: "area",
+      value: "",
+      type: "text"
+    },
+    city: {
+      name: "city",
+      value: "",
+      type: "text"
+    },
+    email: {
+      name: "email",
+      value: "",
+      type: "email"
+    },
+    firstName: {
+      name: "firstName",
+      value: "",
+      type: "text"
+    },
+    lastName: {
+      name: "lastName",
+      value: "",
+      type: "text"
+    },
+    regNum: {
+      name: "regNum",
+      value: "",
+      type: "text"
+    },
+    state: {
+      name: "state",
+      value: "Maharashtra",
+      type: "text",
+      disabled: true
+    },
+    status: {
+      name: "status",
+      value: "Not Approved",
+      type: "text",
+      disabled: true
+    },
+    propertyNum: {
+      name: "propertyNum",
+      value: "",
+      type: "text"
+    },
+    surveyNum: {
+      name: "surveyNum",
+      value: "",
+      type: "text"
+    },
+    type: {
+      name: "type",
+      value: "",
+      type: "text"
+    },
+    username: {
+      name: "username",
+      value: "",
+      type: "text",
+      disabled: true
+    },
+    zip: {
+      name: "zip",
+      value: "",
+      type: "text"
+    }
+  });
+
+  useEffect(() => {
+    if (userState && userState.isAuth && !userState.error) {
+      setProperty({
+        ...property,
+        username: { ...property.username, value: userState.username }
+      });
+    }
+  }, [userState && userState.error, userState && userState.isAuth]);
+
+  const onChangeHandler = (event) => {
+    let { name, value } = event.target;
+    setProperty({ ...property, [name]: { ...property[name], value: value } });
+  };
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    let propertyDto = {
+      address: property.address.value,
+      firstName: property.firstName.value,
+      lastName: property.lastName.value,
+      surveyno: property.surveyNum.value,
+      regno: property.regNum.value,
+      propertyno: property.propertyNum.value,
+      state: property.state.value,
+      email: property.email.value,
+      city: property.city.value,
+      area: property.area.value,
+      zip: property.zip.value,
+      username: property.username.value,
+      status: property.status.value,
+      type: property.type.value
+    };
+    postProperty(propertyDto);
+  };
+
+  let content = (
+    <Form
+      // noValidate
+      // validated={true}
+      onSubmit={onSubmitHandler}
+      className="add-property-form"
+    >
+      <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Label>First name</Form.Label>
+          <Form.Control
+            required
+            name={property.firstName.name}
+            type={property.firstName.type}
+            value={property.firstName.value}
+            onChange={onChangeHandler}
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustom02">
+          <Form.Label>Last name</Form.Label>
+          <Form.Control
+            required
+            name={property.lastName.name}
+            type={property.lastName.type}
+            value={property.lastName.value}
+            onChange={onChangeHandler}
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+          <Form.Label>Username</Form.Label>
+          <InputGroup>
+            <Form.Control
+              name={property.username.name}
+              type={property.username.type}
+              value={property.username.value}
+              onChange={onChangeHandler}
+              required
+              disabled={property.username.disabled}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please choose a username.
+            </Form.Control.Feedback>
+          </InputGroup>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="9" controlId="validationCustom04">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            name={property.email.name}
+            type={property.email.type}
+            value={property.email.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid email.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="3" controlId="validationCustom05">
+          <Form.Label>Status</Form.Label>
+          <Form.Control
+            disabled={property.status.disabled}
+            name={property.status.name}
+            type={property.status.type}
+            value={property.status.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Text muted>Only admins can change status.</Form.Text>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom04">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            name={property.address.name}
+            type={property.address.type}
+            value={property.address.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid address.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} controlId="formGridState">
+          <Form.Label>State</Form.Label>
+          <Form.Control
+            as="select"
+            name={property.type.name}
+            type={property.type.type}
+            value={property.type.value}
+            onChange={onChangeHandler}
+          >
+            <option>Flat</option>
+            <option>Plot</option>
+            <option>House</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustom03">
+          <Form.Label>Area</Form.Label>
+          <Form.Control
+            name={property.area.name}
+            type={property.area.type}
+            value={property.area.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid area.
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom03">
+          <Form.Label>City</Form.Label>
+          <Form.Control
+            name={property.city.name}
+            type={property.city.type}
+            value={property.city.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid city.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustom04">
+          <Form.Label>State</Form.Label>
+          <Form.Control
+            name={property.state.name}
+            type={property.state.type}
+            value={property.state.value}
+            disabled={property.state.disabled}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid area.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustom05">
+          <Form.Label>Zip</Form.Label>
+          <Form.Control
+            name={property.zip.name}
+            type={property.zip.type}
+            value={property.zip.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid zip.
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="6" controlId="validationCustom03">
+          <Form.Label>Reg Number</Form.Label>
+          <Form.Control
+            name={property.regNum.name}
+            type={property.regNum.type}
+            value={property.regNum.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid reg number.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="3" controlId="validationCustom04">
+          <Form.Label>Property Num</Form.Label>
+          <Form.Control
+            name={property.propertyNum.name}
+            type={property.propertyNum.type}
+            value={property.propertyNum.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid propertyNum.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="3" controlId="validationCustom05">
+          <Form.Label>Survey Num</Form.Label>
+          <Form.Control
+            name={property.surveyNum.name}
+            type={property.surveyNum.type}
+            value={property.surveyNum.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid surveyNum.
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Form.Row>
+
+      <Button type="submit">Add Property</Button>
+    </Form>
+  );
+
+  if (propertyState && loading)
+    content = (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    );
+
+  return (
+    <React.Fragment>
+      <Header {...props} />
+      <main className="add-property-container">
+        <h2>Add Property</h2>
+        {content}
+      </main>
+    </React.Fragment>
+  );
+};
+
+export default addProperty;

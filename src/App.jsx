@@ -6,6 +6,7 @@ import Loader from "./Loader";
 const MODApp = React.lazy(() => import("../src/Mentor-on-demand/App"));
 const JwtApp = React.lazy(() => import("../src/Jwt-Secured-Auth/App"));
 const ThunkApp = React.lazy(() => import("./React-redux-thunk/App"));
+const StampRegiApp = React.lazy(() => import("./Regi-stamps-ui/App"));
 const BootstrapApp = React.lazy(() =>
   import("../src/React-redux-bootstrap/App")
 );
@@ -32,13 +33,17 @@ export default function App() {
         <Button variant="secondary" onClick={() => setSelected(5)}>
           React Hooks App
         </Button>
+        <Button variant="secondary" onClick={() => setSelected(6)}>
+          StampRegiApp
+        </Button>
       </ButtonGroup>
     </div>,
     <JwtApp />,
     <MODApp />,
     <ThunkApp />,
     <BootstrapApp />,
-    <ReactHooksApp />
+    <ReactHooksApp />,
+    <StampRegiApp />
   ];
 
   return (

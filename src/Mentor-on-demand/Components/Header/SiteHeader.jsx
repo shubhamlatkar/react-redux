@@ -5,13 +5,13 @@ import UserContext from "../../Store/Contexts/UserContext";
 
 import "../../scss/style.scss";
 
-const SiteHeader = props => {
+const SiteHeader = (props) => {
   const userContext = useContext(UserContext);
   let { isAuth, userState } = userContext;
 
   const [filterBy, setFilterby] = useState("");
 
-  const onClickHandler = e => {
+  const onClickHandler = (e) => {
     if (isAuth) {
       userContext.logout();
       props.history.push("/dashboard");
@@ -22,7 +22,7 @@ const SiteHeader = props => {
     <Form className="search-form">
       <button
         className="button"
-        onClick={event => {
+        onClick={(event) => {
           event.preventDefault();
           props.handelFilterChange(filterBy);
           setFilterby("");
@@ -34,7 +34,7 @@ const SiteHeader = props => {
         type="text"
         placeholder="Search"
         value={filterBy}
-        onChange={event => setFilterby(event.target.value)}
+        onChange={(event) => setFilterby(event.target.value)}
       />
     </Form>
   ) : null;
