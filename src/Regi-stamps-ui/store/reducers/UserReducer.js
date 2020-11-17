@@ -8,7 +8,8 @@ export const initState = {
   error: null,
   type: null,
   username: null,
-  user: null
+  user: null,
+  signup: false
 };
 
 const UserReducer = (state, action) => {

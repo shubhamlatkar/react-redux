@@ -3,7 +3,9 @@ import React from "react";
 const PropertyContext = React.createContext({
   propertyState: {},
   postProperty: (property) => {},
-  getPropertyByUsername: () => {}
+  getPropertyByUsername: () => {},
+  patchProperty: () => {},
+  getPropertyByNumber: () => {}
 });
 
 export default PropertyContext;

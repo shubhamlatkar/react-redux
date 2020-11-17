@@ -25,7 +25,7 @@ const userDashboard = (props) => {
     </Spinner>
   );
 
-  if (isAuth && propertyState && properties) {
+  if (isAuth && propertyState && properties && properties.length > 0) {
     let approved = [];
     let notApproved = [];
     let buy = [];
@@ -42,7 +42,7 @@ const userDashboard = (props) => {
           >
             <div>{data.firstName}</div>
             <div>{data.lastName}</div>
-            <div>{data.propertyno}</div>
+            <div>{data.price}</div>
           </ListGroup.Item>
         );
 
@@ -56,7 +56,7 @@ const userDashboard = (props) => {
           >
             <div>{data.firstName}</div>
             <div>{data.lastName}</div>
-            <div>{data.propertyno}</div>
+            <div>{data.price}</div>
           </ListGroup.Item>
         );
 
@@ -70,7 +70,7 @@ const userDashboard = (props) => {
           >
             <div>{data.firstName}</div>
             <div>{data.lastName}</div>
-            <div>{data.propertyno}</div>
+            <div>{data.price}</div>
           </ListGroup.Item>
         );
 
@@ -84,7 +84,7 @@ const userDashboard = (props) => {
           >
             <div>{data.firstName}</div>
             <div>{data.lastName}</div>
-            <div>{data.propertyno}</div>
+            <div>{data.price}</div>
           </ListGroup.Item>
         );
       content = (

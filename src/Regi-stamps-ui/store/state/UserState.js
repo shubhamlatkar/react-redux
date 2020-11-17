@@ -17,7 +17,41 @@ const UserState = (props) => {
 
   const logoutAll = () => {};
 
-  const signup = (signupData) => {};
+  const signup = (data) => {
+    let user = {};
+    user.isAuth = false;
+    user.loading = true;
+    dispatch({
+      type: actionTypes.LOGIN,
+      user
+    });
+
+    baseAxios({
+      method: "post",
+      url: `/users/signup`,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: data
+    })
+      .then((res) => {
+        let user = {};
+        user.isAuth = true;
+        user.loading = false;
+        user.error = false;
+        user.signup = true;
+        user.type = res && res.data && res.data.roles;
+        user.user = res && res.data;
+        dispatch({ type: actionTypes.SIGNUP, user });
+      })
+      .catch((err) => {
+        let user = {};
+        user.isAuth = false;
+        user.error = true;
+        user.loading = false;
+        dispatch({ type: actionTypes.LOGIN, user });
+      });
+  };
 
   const tryAutoLogin = useCallback(() => {}, []);
 

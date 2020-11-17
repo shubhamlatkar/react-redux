@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Jumbotron } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 import Header from "../../components/header/Header";
-import AdminDashboard from "../../components/users/AdminDashboard";
 import BasicDashboard from "../../components/users/BasicDashboard";
 import UserDashboard from "../../components/users/UserDashboard";
 import AuthContext from "../../store/context/AuthContext";
@@ -39,14 +39,10 @@ const dashbaord = (props) => {
 
   if (user) {
     let roles = user.roles.filter((role) =>
-      role.toLowerCase().includes("admin")
+      role.toLowerCase().includes("buyer")
     );
-    if (roles)
-      content = (
-        <section className="user-card-section">
-          <AdminDashboard {...props} />
-        </section>
-      );
+    if (roles && roles[0] && roles[0].toLowerCase().includes("buyer"))
+      content = <Redirect to="/search-property" />;
     else
       content = (
         <section className="user-card-section">

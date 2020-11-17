@@ -1,3 +1,4 @@
+import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Col, Form, InputGroup, Spinner } from "react-bootstrap";
 import AuthContext from "../../store/context/AuthContext";
@@ -11,7 +12,8 @@ const addProperty = (props) => {
 
   const userContext = useContext(AuthContext);
   const { userState } = userContext;
-
+  const [aadhar, setAadhar] = useState({});
+  const [pan, setPan] = useState({});
   const [property, setProperty] = useState({
     address: {
       name: "address",
@@ -85,6 +87,21 @@ const addProperty = (props) => {
       name: "zip",
       value: "",
       type: "text"
+    },
+    price: {
+      name: "price",
+      value: "",
+      type: "text"
+    },
+    aadhar: {
+      name: "aadhar",
+      value: "",
+      type: "text"
+    },
+    pan: {
+      name: "pan",
+      value: "",
+      type: "text"
     }
   });
 
@@ -102,25 +119,57 @@ const addProperty = (props) => {
     setProperty({ ...property, [name]: { ...property[name], value: value } });
   };
 
+  const onAadharChange = (event) => {
+    setAadhar(event.target.files[0]);
+  };
+  const onPanChange = (event) => {
+    setPan(event.target.files[0]);
+  };
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    let propertyDto = {
-      address: property.address.value,
-      firstName: property.firstName.value,
-      lastName: property.lastName.value,
-      surveyno: property.surveyNum.value,
-      regno: property.regNum.value,
-      propertyno: property.propertyNum.value,
-      state: property.state.value,
-      email: property.email.value,
-      city: property.city.value,
-      area: property.area.value,
-      zip: property.zip.value,
-      username: property.username.value,
-      status: property.status.value,
-      type: property.type.value
-    };
-    postProperty(propertyDto);
+
+    let formData = new FormData();
+    formData.append("file", aadhar, aadhar.name);
+
+    Axios.post("http://localhost:8089/uploadFile", formData)
+      .then((aadharRes) => {
+        setProperty({
+          ...property,
+          aadhar: { value: aadharRes.data && aadharRes.data.fileDownloadUri }
+        });
+        formData = new FormData();
+        formData.append("file", pan, pan.name);
+        Axios.post("http://localhost:8089/uploadFile", formData).then(
+          (panRes) => {
+            setProperty({
+              ...property,
+              pan: { value: panRes.data && panRes.data.fileDownloadUri }
+            });
+            let propertyDto = {
+              address: property.address.value,
+              firstName: property.firstName.value,
+              lastName: property.lastName.value,
+              surveyno: property.surveyNum.value,
+              regno: property.regNum.value,
+              propertyno: property.propertyNum.value,
+              state: property.state.value,
+              email: property.email.value,
+              city: property.city.value,
+              area: property.area.value,
+              zip: property.zip.value,
+              username: property.username.value,
+              status: property.status.value,
+              type: property.type.value,
+              price: property.price.value,
+              aadharCardDoc: aadharRes.data && aadharRes.data.fileDownloadUri,
+              panCardDoc: panRes.data && panRes.data.fileDownloadUri
+            };
+            postProperty(propertyDto);
+          }
+        );
+      })
+      .catch((err) => console.log);
   };
 
   let content = (
@@ -212,7 +261,7 @@ const addProperty = (props) => {
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>State</Form.Label>
+          <Form.Label>Type</Form.Label>
           <Form.Control
             as="select"
             name={property.type.name}
@@ -282,7 +331,7 @@ const addProperty = (props) => {
         </Form.Group>
       </Form.Row>
       <Form.Row>
-        <Form.Group as={Col} md="6" controlId="validationCustom03">
+        <Form.Group as={Col} md="3" controlId="validationCustom03">
           <Form.Label>Reg Number</Form.Label>
           <Form.Control
             name={property.regNum.name}
@@ -293,6 +342,19 @@ const addProperty = (props) => {
           />
           <Form.Control.Feedback type="invalid">
             Please provide a valid reg number.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="3" controlId="validationCustom03">
+          <Form.Label>Price</Form.Label>
+          <Form.Control
+            name={property.price.name}
+            type={property.price.type}
+            value={property.price.value}
+            onChange={onChangeHandler}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid price.
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="validationCustom04">
@@ -320,6 +382,36 @@ const addProperty = (props) => {
           <Form.Control.Feedback type="invalid">
             Please provide a valid surveyNum.
           </Form.Control.Feedback>
+        </Form.Group>
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} md="6" controlId="validationCustomFile">
+          <Form.File
+            id="aadhar"
+            name="aadhar"
+            label="Aadhar Card"
+            onChange={onAadharChange}
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid aadhar.
+          </Form.Control.Feedback>
+          <Form.Text muted>
+            {property.aadhar.value && "Download URI " + property.aadhar.value}
+          </Form.Text>
+        </Form.Group>
+        <Form.Group as={Col} md="6" controlId="validationCustomFile">
+          <Form.File
+            id="pan"
+            name="pan"
+            label="Pan Card"
+            onChange={onPanChange}
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid aadhar.
+          </Form.Control.Feedback>
+          <Form.Text muted>
+            {property.pan.value && "Download URI " + property.pan.value}
+          </Form.Text>
         </Form.Group>
       </Form.Row>
 

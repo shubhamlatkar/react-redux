@@ -3,7 +3,8 @@ import * as actionTypes from "../ActionTypes";
 export const initState = {
   properties: null,
   loading: false,
-  error: null
+  error: null,
+  searched: null
 };
 
 const UserReducer = (state, action) => {

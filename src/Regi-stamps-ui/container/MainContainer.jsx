@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AddProperty from "../components/add-property/AddProperty";
 import Footer from "../components/footer/Footer";
+import ApprovedModal from "../components/modal/ApprovedModal";
 import PropertyModal from "../components/modal/PropertyModal";
 import UserModal from "../components/modal/UserModal";
 import SearchProperty from "../components/search-property/SearchProperty";
@@ -36,6 +37,7 @@ const MainContainer = React.memo((props) => {
               <Route path="/add-property" component={AddProperty} />
               <Route path="/search-property" component={SearchProperty} />
               <Route path="/property/:name" component={PropertyModal} />
+              <Route path="/sent-for-approval" component={ApprovedModal} />
             </React.Fragment>
           ) : null}
           <Route path="/error" component={UserModal} />
