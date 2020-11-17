@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 // import App from "../src/Mentor-on-demand/App";
 // import App from "../src/Jwt-Secured-Auth/App";
 // import App from "../src/Regi-stamps-ui/App";
+// import App from "../src/ReplIt-h2-spring-boot/App";
 import App from "./App";
 import "./styles.css";
 

@@ -11,6 +11,9 @@ const BootstrapApp = React.lazy(() =>
   import("../src/React-redux-bootstrap/App")
 );
 const ReactHooksApp = React.lazy(() => import("../src/React-hooks/MyApp"));
+const ReplItH2Sample = React.lazy(() =>
+  import("../src/ReplIt-h2-spring-boot/App")
+);
 
 export default function App() {
   let [selected, setSelected] = React.useState(parseInt(0, 10));
@@ -36,6 +39,9 @@ export default function App() {
         <Button variant="secondary" onClick={() => setSelected(6)}>
           StampRegiApp
         </Button>
+        <Button variant="secondary" onClick={() => setSelected(7)}>
+          ReplItH2Sample
+        </Button>
       </ButtonGroup>
     </div>,
     <JwtApp />,
@@ -43,7 +49,8 @@ export default function App() {
     <ThunkApp />,
     <BootstrapApp />,
     <ReactHooksApp />,
-    <StampRegiApp />
+    <StampRegiApp />,
+    <ReplItH2Sample />
   ];
 
   return (
