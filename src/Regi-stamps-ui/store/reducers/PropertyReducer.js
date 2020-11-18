@@ -4,7 +4,8 @@ export const initState = {
   properties: null,
   loading: false,
   error: null,
-  searched: null
+  searched: null,
+  allProperties: null
 };
 
 const UserReducer = (state, action) => {
@@ -18,6 +19,8 @@ const UserReducer = (state, action) => {
     case actionTypes.PROPERTY_ERROR:
       return { ...state, ...action.property };
     case actionTypes.PROPERTY_SUCCESS:
+      return { ...state, ...action.property };
+    case actionTypes.ALL_PROPERTY_SUCCESS:
       return { ...state, ...action.property };
     default:
       return;

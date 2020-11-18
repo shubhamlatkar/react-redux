@@ -58,7 +58,7 @@ const addProperty = (props) => {
     },
     status: {
       name: "status",
-      value: "Not Approved",
+      value: "Step-1 Pending Admin Approval, Property Not Approved",
       type: "text",
       disabled: true
     },
@@ -102,6 +102,12 @@ const addProperty = (props) => {
       name: "pan",
       value: "",
       type: "text"
+    },
+    buyer: {
+      name: "buyer",
+      value: "NA",
+      type: "text",
+      disabled: true
     }
   });
 
@@ -162,6 +168,7 @@ const addProperty = (props) => {
               status: property.status.value,
               type: property.type.value,
               price: property.price.value,
+              buyer: property.buyer.value,
               aadharCardDoc: aadharRes.data && aadharRes.data.fileDownloadUri,
               panCardDoc: panRes.data && panRes.data.fileDownloadUri
             };
@@ -180,7 +187,7 @@ const addProperty = (props) => {
       className="add-property-form"
     >
       <Form.Row>
-        <Form.Group as={Col} md="4" controlId="validationCustom01">
+        <Form.Group as={Col} md="3" controlId="validationCustom01">
           <Form.Label>First name</Form.Label>
           <Form.Control
             required
@@ -191,7 +198,7 @@ const addProperty = (props) => {
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustom02">
+        <Form.Group as={Col} md="3" controlId="validationCustom02">
           <Form.Label>Last name</Form.Label>
           <Form.Control
             required
@@ -202,7 +209,7 @@ const addProperty = (props) => {
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+        <Form.Group as={Col} md="3" controlId="validationCustomUsername">
           <Form.Label>Username</Form.Label>
           <InputGroup>
             <Form.Control
@@ -218,9 +225,25 @@ const addProperty = (props) => {
             </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
+        <Form.Group as={Col} md="3" controlId="validationCustomUsername">
+          <Form.Label>Buyer</Form.Label>
+          <InputGroup>
+            <Form.Control
+              name={property.buyer.name}
+              type={property.buyer.type}
+              value={property.buyer.value}
+              onChange={onChangeHandler}
+              required
+              disabled={property.buyer.disabled}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please choose a buyer.
+            </Form.Control.Feedback>
+          </InputGroup>
+        </Form.Group>
       </Form.Row>
       <Form.Row>
-        <Form.Group as={Col} md="9" controlId="validationCustom04">
+        <Form.Group as={Col} md="6" controlId="validationCustom04">
           <Form.Label>Email</Form.Label>
           <Form.Control
             name={property.email.name}
@@ -233,7 +256,7 @@ const addProperty = (props) => {
             Please provide a valid email.
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="3" controlId="validationCustom05">
+        <Form.Group as={Col} md="6" controlId="validationCustom05">
           <Form.Label>Status</Form.Label>
           <Form.Control
             disabled={property.status.disabled}
@@ -263,15 +286,16 @@ const addProperty = (props) => {
         <Form.Group as={Col} controlId="formGridState">
           <Form.Label>Type</Form.Label>
           <Form.Control
-            as="select"
+            // as="select"
             name={property.type.name}
             type={property.type.type}
             value={property.type.value}
             onChange={onChangeHandler}
           >
-            <option>Flat</option>
+            {/* <option>Flat</option>
             <option>Plot</option>
-            <option>House</option>
+            <option>House</option> */}
+            <Form.Text muted>Flat/Plot </Form.Text>
           </Form.Control>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom03">

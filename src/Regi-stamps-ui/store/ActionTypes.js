@@ -7,3 +7,4 @@ export const BUYER = "BUYER";
 export const SELLER = "SELLER";
 export const PROPERTY_ERROR = "PROPERTY_ERROR";
 export const PROPERTY_SUCCESS = "PROPERTY_SUCCESS";
+export const ALL_PROPERTY_SUCCESS = "ALL_PROPERTY_SUCCESS";

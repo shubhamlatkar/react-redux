@@ -36,7 +36,7 @@ const UserState = (props) => {
     })
       .then((res) => {
         let user = {};
-        user.isAuth = true;
+        user.isAuth = false;
         user.loading = false;
         user.error = false;
         user.signup = true;

@@ -73,6 +73,7 @@ const signup = (props) => {
       password: property.password.value
     };
     signup(propertyDto);
+    props.history.push("/login");
   };
 
   let content = (
@@ -84,7 +85,7 @@ const signup = (props) => {
       id="custom-login-form"
     >
       <Form.Row>
-        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+        <Form.Group as={Col} md="6" controlId="validationCustomUsername">
           <Form.Label>Username</Form.Label>
           <InputGroup>
             <Form.Control
@@ -100,7 +101,7 @@ const signup = (props) => {
             </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustomPassword">
+        <Form.Group as={Col} md="6" controlId="validationCustomPassword">
           <Form.Label>Password</Form.Label>
           <InputGroup>
             <Form.Control
@@ -118,7 +119,7 @@ const signup = (props) => {
         </Form.Group>
       </Form.Row>
       <Form.Row>
-        <Form.Group as={Col} md="9" controlId="validationCustom01">
+        <Form.Group as={Col} md="12" controlId="validationCustom01">
           <Form.Label>Email</Form.Label>
           <Form.Control
             name={property.email.name}
@@ -133,7 +134,7 @@ const signup = (props) => {
         </Form.Group>
       </Form.Row>
       <Form.Row>
-        <Form.Group as={Col} md="4" controlId="validationCustom02">
+        <Form.Group as={Col} md="6" controlId="validationCustom02">
           <Form.Label>Address</Form.Label>
           <Form.Control
             name={property.address.name}
@@ -148,7 +149,7 @@ const signup = (props) => {
         </Form.Group>
       </Form.Row>
       <Form.Row>
-        <Form.Group as={Col} md="4" controlId="validationCustom03">
+        <Form.Group as={Col} md="6" controlId="validationCustom03">
           <Form.Label>City</Form.Label>
           <Form.Control
             name={property.city.name}
@@ -162,7 +163,7 @@ const signup = (props) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group as={Col} md="4" controlId="validationCustom05">
+        <Form.Group as={Col} md="6" controlId="validationCustom05">
           <Form.Label>Roles</Form.Label>
           <Form.Control
             name={property.roles.name}
@@ -177,7 +178,7 @@ const signup = (props) => {
         </Form.Group>
       </Form.Row>
       <Form.Row>
-        <Form.Group as={Col} md="6" controlId="validationCustom06">
+        <Form.Group as={Col} md="12" controlId="validationCustom06">
           <Form.Label>Reg Number</Form.Label>
           <Form.Control
             name={property.regNum.name}

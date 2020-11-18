@@ -141,7 +141,7 @@ const propertyModal = (props) => {
     let roles = userState.user.roles.filter((role) =>
       role.toLowerCase().includes("admin")
     );
-    roles = roles ? false : true;
+    roles = roles === [] ? true : false;
     properties.forEach((data, index) => {
       if (data.propertyno.toString() === props.match.params.name) {
         setProperty(data);
@@ -174,7 +174,7 @@ const propertyModal = (props) => {
           status: {
             ...form.status,
             value: data.status,
-            disabled: data.status.toString().toLowerCase().includes("not")
+            disabled: !roles
           },
           username: { ...form.username, value: data.username },
           state: { ...form.state, value: data.state, disabled: roles },
@@ -320,6 +320,7 @@ const propertyModal = (props) => {
               name={form.status.name}
               type={form.status.type}
               value={form.status.value}
+              disabled={form.status.disabled}
               onChange={onChangeHandler}
               required
             >

@@ -1,15 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Jumbotron } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import {
+  Alert,
+  Button,
+  ButtonGroup,
+  Container,
+  Jumbotron,
+  Row
+} from "react-bootstrap";
 import Header from "../../components/header/Header";
 import BasicDashboard from "../../components/users/BasicDashboard";
 import UserDashboard from "../../components/users/UserDashboard";
+import baseAxios from "../../store/axios/BaseAxios";
 import AuthContext from "../../store/context/AuthContext";
 
 const dashbaord = (props) => {
   const userContext = useContext(AuthContext);
   const { userState } = userContext;
   const [user, setUser] = useState("");
+  const [sell, setSell] = useState(false);
+  const [view, setView] = useState(false);
+  const [properties, setProperties] = useState([]);
+
+  useEffect(() => {});
 
   useEffect(() => {
     if (userState && userState.isAuth && !userState.error)
@@ -38,17 +50,62 @@ const dashbaord = (props) => {
   );
 
   if (user) {
-    let roles = user.roles.filter((role) =>
-      role.toLowerCase().includes("buyer")
-    );
-    if (roles && roles[0] && roles[0].toLowerCase().includes("buyer"))
-      content = <Redirect to="/search-property" />;
-    else
-      content = (
+    content = view ? (
+      <Container>
         <section className="user-card-section">
           <UserDashboard {...props} />
         </section>
-      );
+      </Container>
+    ) : (
+      <>
+        <Row>
+          <Container>
+            <ButtonGroup aria-label="Basic example">
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setSell(!sell);
+                }}
+              >
+                Sell Property
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  props.history.push("/search-property");
+                }}
+              >
+                Buy Property
+              </Button>
+            </ButtonGroup>
+          </Container>
+        </Row>
+        {sell && (
+          <Row>
+            <Container>
+              <ButtonGroup aria-label="Sell">
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    props.history.push("/add-property");
+                  }}
+                >
+                  Add Property
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    setView(true);
+                  }}
+                >
+                  View Property
+                </Button>
+              </ButtonGroup>
+            </Container>
+          </Row>
+        )}
+      </>
+    );
   }
 
   return (

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
+  Alert,
   Button,
   Container,
   Form,
@@ -115,6 +116,12 @@ const searchProperty = (props) => {
         <td>{property.state}</td>
         <td>{property.price}</td>
         <td>
+          <Alert.Link href={property.aadharCardDoc}>download</Alert.Link>
+        </td>
+        <td>
+          <Alert.Link href={property.panCardDoc}>download</Alert.Link>
+        </td>
+        <td>
           <Button varient="primary" onClick={onBuyHandler}>
             Buy
           </Button>
@@ -157,6 +164,8 @@ const searchProperty = (props) => {
               <th>Username</th>
               <th>State</th>
               <th>Price</th>
+              <th>Aadhar</th>
+              <th>Pan</th>
               <th>Action</th>
             </tr>
           </thead>
