@@ -283,20 +283,15 @@ const addProperty = (props) => {
             Please provide a valid address.
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} controlId="formGridState">
+        <Form.Group as={Col} md="4" controlId="tpe">
           <Form.Label>Type</Form.Label>
           <Form.Control
-            // as="select"
             name={property.type.name}
             type={property.type.type}
             value={property.type.value}
             onChange={onChangeHandler}
-          >
-            {/* <option>Flat</option>
-            <option>Plot</option>
-            <option>House</option> */}
-            <Form.Text muted>Flat/Plot </Form.Text>
-          </Form.Control>
+          ></Form.Control>
+          <Form.Text muted>Flat/Plot</Form.Text>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom03">
           <Form.Label>Area</Form.Label>

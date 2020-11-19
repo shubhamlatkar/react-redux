@@ -143,6 +143,12 @@ const propertyModal = (props) => {
     );
     roles = roles === [] ? true : false;
     properties.forEach((data, index) => {
+      let approved = false;
+      if (
+        data.status &&
+        data.status.toString().toLowerCase() === "property approved"
+      )
+        approved = true;
       if (data.propertyno.toString() === props.match.params.name) {
         setProperty(data);
         setForm({
@@ -154,7 +160,11 @@ const propertyModal = (props) => {
             value: data.firstName,
             disabled: roles
           },
-          lastName: { ...form.lastName, value: data.lastName, disabled: roles },
+          lastName: {
+            ...form.lastName,
+            value: data.lastName,
+            disabled: roles
+          },
           address: { ...form.address, value: data.address, disabled: roles },
           city: { ...form.city, value: data.city, disabled: roles },
           regNum: { ...form.regNum, value: data.regno, disabled: roles },
@@ -174,7 +184,11 @@ const propertyModal = (props) => {
           status: {
             ...form.status,
             value: data.status,
-            disabled: !roles
+            disabled:
+              userState &&
+              userState.username &&
+              userState.username !== "test" &&
+              !approved
           },
           username: { ...form.username, value: data.username },
           state: { ...form.state, value: data.state, disabled: roles },

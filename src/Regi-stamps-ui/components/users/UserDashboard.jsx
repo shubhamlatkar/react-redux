@@ -15,7 +15,7 @@ const userDashboard = (props) => {
   useEffect(() => {
     if (userState && userState.isAuth && !userState.error) {
       setIsAuth(true);
-      getPropertyByUsername(userState.username);
+      getPropertyByUsername("atharvaseller");
     }
   }, [userState, userState && userState.error, userState && userState.isAuth]);
 
@@ -74,7 +74,10 @@ const userDashboard = (props) => {
           </ListGroup.Item>
         );
 
-      if (data.status && data.status.toString().toLowerCase() === "approved")
+      if (
+        data.status &&
+        data.status.toString().toLowerCase() === "property approved"
+      )
         approved.push(
           <ListGroup.Item
             onClick={() => {
