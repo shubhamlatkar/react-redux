@@ -17,6 +17,7 @@ const ReplItH2Sample = React.lazy(() =>
 
 export default function App() {
   let [selected, setSelected] = React.useState(parseInt(0, 10));
+  if(true){}
   let components = [
     <div className="default-view">
       <h1>Select From one</h1>
